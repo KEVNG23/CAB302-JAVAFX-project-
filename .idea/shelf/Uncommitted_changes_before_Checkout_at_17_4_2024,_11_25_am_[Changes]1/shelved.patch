@@ -1,0 +1,49 @@
+Index: src/main/java/module-info.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>module com.example.demo1 {\n    requires javafx.controls;\n    requires javafx.fxml;\n    requires java.datatransfer;\n\n\n    opens com.example.demo1 to javafx.fxml;\n    exports com.example.demo1;\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/module-info.java b/src/main/java/module-info.java
+--- a/src/main/java/module-info.java	
++++ b/src/main/java/module-info.java	
+@@ -2,8 +2,10 @@
+     requires javafx.controls;
+     requires javafx.fxml;
+     requires java.datatransfer;
++    requires jbcrypt;
+ 
+ 
+-    opens com.example.demo1 to javafx.fxml;
++    opens com.example.demo1.Controller to javafx.fxml;
+     exports com.example.demo1;
++    exports com.example.demo1.Controller;
+ }
+\ No newline at end of file
+Index: src/main/java/com/example/demo1/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.demo1;\n\nimport javafx.application.Application;\nimport javafx.fxml.FXMLLoader;\nimport javafx.scene.Scene;\nimport javafx.stage.Stage;\n\nimport java.io.IOException;\n\npublic class Main extends Application {\n    @Override\n    public void start(Stage stage) throws IOException {\n        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(\"hello-view.fxml\"));\n        Scene scene = new Scene(fxmlLoader.load());\n        stage.setTitle(\"Hello!\");\n        stage.setScene(scene);\n        stage.show();\n    }\n\n    public static void main(String[] args) {\n        launch();\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/example/demo1/Main.java b/src/main/java/com/example/demo1/Main.java
+--- a/src/main/java/com/example/demo1/Main.java	
++++ b/src/main/java/com/example/demo1/Main.java	
+@@ -8,10 +8,13 @@
+ import java.io.IOException;
+ 
+ public class Main extends Application {
++    public static final int WIDTH = 600;
++
++    public static final int HEIGHT = 450;
+     @Override
+     public void start(Stage stage) throws IOException {
+-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("hello-view.fxml"));
+-        Scene scene = new Scene(fxmlLoader.load());
++        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("login-view.fxml"));
++        Scene scene = new Scene(fxmlLoader.load(), WIDTH,HEIGHT);
+         stage.setTitle("Hello!");
+         stage.setScene(scene);
+         stage.show();
