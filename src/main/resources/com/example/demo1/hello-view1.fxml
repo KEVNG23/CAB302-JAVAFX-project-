@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.Controller.HelloController">
+  <children>
+    <VBox spacing="10.0" layoutX="150.0" layoutY="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0" AnchorPane.bottomAnchor="50.0">
+      <children>
+        <Label text="Profile Settings" style="-fx-font-size: 16px;" />
+        <Separator />
+        <HBox spacing="15.0">
+          <children>
+            <Label text="Username:" />
+            <TextField fx:id="usernameField" promptText="Enter new username" />
+            <Button text="Change" onAction="#onChangeUsername" />
+          </children>
+        </HBox>
+        <HBox spacing="15.0">
+          <children>
+            <Label text="Password:" />
+            <PasswordField fx:id="passwordField" promptText="Enter new password" />
+            <Button text="Change" onAction="#onChangePassword" />
+          </children>
+        </HBox>
+        <HBox spacing="15.0">
+          <children>
+            <Label text="Email:" />
+            <TextField fx:id="emailField" promptText="Enter new email" />
+            <Button text="Change" onAction="#onChangeEmail" />
+          </children>
+        </HBox>
+        <HBox spacing="15.0">
+          <children>
+            <Label text="Time Spent:" />
+            <Label fx:id="timeSpentLabel" text="00:00:00" />
+          </children>
+        </HBox>
+        <Button text="Save Changes" onAction="#onSaveChanges" />
+      </children>
+      <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+      </padding>
+    </VBox>
+  </children>
+</AnchorPane>
