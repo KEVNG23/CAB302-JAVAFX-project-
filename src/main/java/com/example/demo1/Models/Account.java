@@ -3,23 +3,35 @@ package com.example.demo1.Models;
 import org.mindrot.jbcrypt.BCrypt;
 
 public class Account {
-    private int id;
+    private Integer id;
     private String username;
 
     private String email;
 
-    private String passwordHash;
-    public Account (String username, String email, String password ){
+    private String password;
+
+    //private static final String SALT = BCrypt.gensalt();
+
+    /**
+     *
+     * @param id
+     * @param username
+     * @param email
+     * @param password
+     */
+    public Account (Integer id, String username, String email, String password){
+        this.id = id;
         this.username = username;
         this.email = email;
-        this.passwordHash = hashPassword(password);
+        this.password = password;
+
     }
 
-    public int getId(){
+    public int getId() {
         return id;
     }
 
-    public void setId(){
+    public void setId(int id){
         this.id = id;
     }
     public String getUsername (){
@@ -38,12 +50,19 @@ public class Account {
         this.email = email;
     }
 
-    public boolean verifyPassword(String password ){
-        return BCrypt.checkpw(password, this.passwordHash);
-    }
-    private String hashPassword(String password) {
-        return BCrypt.hashpw(password, BCrypt.gensalt());
-    }
+    public String getPassword(){return password;}
+
+    //public boolean verifyPassword(String plainPassword) {
+    //    System.out.println("Stored Password Hash: " + passwordHash);
+    //    boolean result = BCrypt.checkpw(plainPassword, passwordHash);
+    //    System.out.println("Password Verification Result: " + result);
+    //    return result;
+    //}
+
+    //private  String hashPassword(String plainPassword) {
+    //    return BCrypt.hashpw(plainPassword, SALT);
+    //}
+
 
 
 }

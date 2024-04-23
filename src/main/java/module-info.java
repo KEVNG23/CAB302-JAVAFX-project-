@@ -3,6 +3,7 @@ module com.example.demo1 {
     requires javafx.fxml;
     requires java.datatransfer;
     requires jbcrypt;
+    requires java.sql;
 
 
     exports com.example.demo1;
@@ -10,5 +11,7 @@ module com.example.demo1 {
 
     opens com.example.demo1 to javafx.fxml;
     opens com.example.demo1.Controller to javafx.fxml;
+    exports com.example.demo1.Models;
+    opens com.example.demo1.Models to javafx.fxml;
 
 }
