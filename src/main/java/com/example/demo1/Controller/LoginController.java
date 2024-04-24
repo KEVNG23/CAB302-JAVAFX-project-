@@ -22,8 +22,7 @@ public class LoginController {
     private Button loginButton;
     @FXML
     private Hyperlink registerLink;
-    @FXML
-    private Hyperlink forgotPasswordLink;
+
 
     private SqliteAccountDAO accountDAO;
 

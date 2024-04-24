@@ -27,11 +27,11 @@ public class Account {
 
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id){
+    public void setId(Integer id){
         this.id = id;
     }
     public String getUsername (){
@@ -51,6 +51,8 @@ public class Account {
     }
 
     public String getPassword(){return password;}
+
+    public void setPassword(String password){this.password = password;}
 
     //public boolean verifyPassword(String plainPassword) {
     //    System.out.println("Stored Password Hash: " + passwordHash);
