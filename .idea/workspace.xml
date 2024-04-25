@@ -5,14 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6bab2e13-c4be-40c6-a58a-038177b3979c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/AccountTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_17_4_2024,_11_25_am_[Changes]1/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_17_4_2024__11_25_am__Changes_1.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/Controller/ActivityDialogController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/Models/Activity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo1/activity-dialog.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_17_4_2024,_12_19_pm_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_17_4_2024,_12_19_pm_[Changes]1/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_17_4_2024,_12_22_pm_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_17_4_2024,_12_24_pm_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_17_4_2024__11_25_am__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_17_4_2024__11_25_am__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_17_4_2024__12_09_pm__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_17_4_2024__12_09_pm__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_17_4_2024__12_19_pm__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_17_4_2024__12_19_pm__Changes_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_17_4_2024__12_22_pm__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_17_4_2024__12_24_pm__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/Controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/Controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/Models/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/Models/Account.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/CalendarTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/CalendarTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/TimerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/TimerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screentrack.db" beforeDir="false" afterPath="$PROJECT_DIR$/screentrack.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/Controller/CalendarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/Controller/CalendarController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/Models/CalendarActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo1/calendar-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo1/calendar-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,9 +33,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="FxmlFile" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -82,7 +93,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "quyen",
+    "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/nguye/OneDrive/Desktop/CAB302/demo1",
     "project.structure.last.edited": "Libraries",
@@ -123,7 +134,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-17.0.10-corretto-17.0.10-3183f394aec4-96c0d24d" />
+        <option value="jdk-17.0.10-corretto-17.0.10-4caba194b151-5cd809f4" />
       </set>
     </attachedChunks>
   </component>

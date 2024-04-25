@@ -2,6 +2,7 @@ package com.example.demo1;
 
 
 import com.example.demo1.Models.Account;
+import com.example.demo1.Models.Activity;
 import com.example.demo1.Models.SqliteConnection;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +17,8 @@ public class Main extends Application {
     public static final int WIDTH = 600;
 
     public static final int HEIGHT = 400;
+    private Activity primaryStage;
+
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("login-view.fxml"));
@@ -24,6 +27,8 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.show();
     }
+
+
 
     public static void main(String[] args) {
         Connection connection = SqliteConnection.getInstance();
