@@ -2,12 +2,12 @@ package com.example.demo1.Models;
 
 import java.time.LocalDate;
 
-public class Activity {
+public class CalendarActivity {
     private String title;
     private LocalDate date;
     private String priority;
 
-    public Activity(String title, LocalDate date, String priority) {
+    public CalendarActivity(String title, LocalDate date, String priority) {
         this.title = title;
         this.date = date;
         this.priority = priority;

@@ -1,7 +1,6 @@
 package com.example.demo1.Controller;
 
-import com.example.demo1.Controller.ActivityDialogController;
-import com.example.demo1.Models.Activity;
+import com.example.demo1.Models.CalendarActivity;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -61,7 +60,7 @@ public class CalendarController implements Initializable {
         drawCalendar();
     }
 
-    private List<Activity> activities = new ArrayList<>();
+    private List<CalendarActivity> activities = new ArrayList<>();
 
     @FXML
     void addNewActivity(ActionEvent event) throws IOException {
@@ -81,8 +80,8 @@ public class CalendarController implements Initializable {
         stage.showAndWait();
     }
 
-    public void addActivity(Activity activity) {
-        activities.add(activity);
+    public void addActivity(CalendarActivity calendarActivity) {
+        activities.add(calendarActivity);
         drawCalendar(); // Redraw the calendar after adding the activity
     }
 
@@ -138,7 +137,7 @@ public class CalendarController implements Initializable {
 
                         // Get activities for this date
                         LocalDate currentDateObj = LocalDate.of(dateFocus.getYear(), dateFocus.getMonthValue(), currentDate);
-                        List<Activity> activitiesOnDate = getActivitiesOnDate(currentDateObj);
+                        List<CalendarActivity> activitiesOnDate = getActivitiesOnDate(currentDateObj);
 
                         // Create a VBox to hold activity information
                         VBox activityInfoBox = new VBox();
@@ -146,9 +145,9 @@ public class CalendarController implements Initializable {
                         activityInfoBox.setMaxHeight(rectangleHeight);
 
                         // Add activity information to the VBox
-                        for (Activity activity : activitiesOnDate) {
-                            Text activityText = new Text(activity.getTitle());
-                            Text priorityText = new Text("Priority: " + activity.getPriority()); // Add priority information
+                        for (CalendarActivity calendarActivity : activitiesOnDate) {
+                            Text activityText = new Text(calendarActivity.getTitle());
+                            Text priorityText = new Text("Priority: " + calendarActivity.getPriority()); // Add priority information
                             activityInfoBox.getChildren().addAll(activityText, priorityText);
                         }
 
@@ -173,11 +172,11 @@ public class CalendarController implements Initializable {
         }
     }
 
-    private List<Activity> getActivitiesOnDate(LocalDate date) {
-        List<Activity> activitiesOnDate = new ArrayList<>();
-        for (Activity activity : activities) {
-            if (activity.getDate().equals(date)) {
-                activitiesOnDate.add(activity);
+    private List<CalendarActivity> getActivitiesOnDate(LocalDate date) {
+        List<CalendarActivity> activitiesOnDate = new ArrayList<>();
+        for (CalendarActivity calendarActivity : activities) {
+            if (calendarActivity.getDate().equals(date)) {
+                activitiesOnDate.add(calendarActivity);
             }
         }
         return activitiesOnDate;
