@@ -12,6 +12,7 @@ import com.example.demo1.Models.MockAccountDAO;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
+import java.util.List;
 
 public class LoginController {
     @FXML
@@ -47,12 +48,28 @@ public class LoginController {
         String username = usernameField.getText();
         String password = passwordField.getText();
         boolean isLoggedIn = authenticateUser (username, password);
-        if(isLoggedIn){
+        SqliteAccountDAO accountDAO = new SqliteAccountDAO();
+
+        if(!existedAccount(username, accountDAO.getAllAccounts())) {
+            showErrorAlert("Can't find this account");
+            return;
+        }
+        if (isLoggedIn) {
             navigationToHomepage();
-        }else{
+        } else {
             showErrorAlert("Incorrect username or password.");
+
         }
 
+
+    }
+    protected boolean existedAccount(String username, List<Account> accounts) {
+        for (Account account : accounts) {
+            if (account.getUsername().equals(username)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 

@@ -53,12 +53,12 @@ public class RegisterController {
     }
 
     @FXML
-    protected void navigationToHomepage() {
+    protected void navigationToLogin() {
         Stage stage = (Stage) registerButton.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("home-view.fxml")); // replace with actual homepage
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("login-view.fxml"));
         Scene scene = null;
         try {
-            scene = new Scene(fxmlLoader.load());
+            scene = new Scene(fxmlLoader.load(), Main.WIDTH, Main.HEIGHT);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -90,7 +90,7 @@ public class RegisterController {
         Account newAccount = new Account(null, username, email, password);
         accountDAO.addAccount(newAccount);
 
-        navigationToHomepage();
+        navigationToLogin();
     }
 
     /**
