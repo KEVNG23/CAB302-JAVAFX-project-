@@ -1,4 +1,4 @@
-package com.example.demo1.Models;
+package com.example.demo1.AccountModel;
 
 import org.mindrot.jbcrypt.BCrypt;
 

@@ -1,7 +1,7 @@
-package com.example.demo1.Controller;
+package com.example.demo1.AccountController;
 
-import com.example.demo1.Models.Account;
-import com.example.demo1.Models.SqliteAccountDAO;
+import com.example.demo1.AccountModel.Account;
+import com.example.demo1.AccountModel.SqliteAccountDAO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

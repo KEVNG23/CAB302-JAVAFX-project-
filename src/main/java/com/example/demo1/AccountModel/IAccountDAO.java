@@ -1,6 +1,6 @@
-package com.example.demo1.Models;
+package com.example.demo1.AccountModel;
 
-import com.example.demo1.Models.Account;
+import com.example.demo1.AccountModel.Account;
 
 import java.util.List;
 

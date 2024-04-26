@@ -6,7 +6,7 @@
 <?import javafx.scene.text.*?>
 
 <BorderPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.demo1.Controller.LoginController">
+            fx:controller="com.example.demo1.AccountController.LoginController">
     <center>
         <HBox alignment="TOP_CENTER" BorderPane.alignment="CENTER">
             <children>
