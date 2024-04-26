@@ -1,48 +1,39 @@
 package com.example.demo1.Models;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDate;
 
 public class CalendarActivity {
-    private ZonedDateTime date;
-    private String clientName;
-    private Integer serviceNo;
+    private String title;
+    private LocalDate date;
+    private String priority;
 
-    public CalendarActivity(ZonedDateTime date, String clientName, Integer serviceNo) {
+    public CalendarActivity(String title, LocalDate date, String priority) {
+        this.title = title;
         this.date = date;
-        this.clientName = clientName;
-        this.serviceNo = serviceNo;
+        this.priority = priority;
     }
 
-    public ZonedDateTime getDate() {
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(ZonedDateTime date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
-    public String getClientName() {
-        return clientName;
+    public String getPriority() {
+        return priority;
     }
 
-    public void setClientName(String clientName) {
-        this.clientName = clientName;
-    }
-
-    public Integer getServiceNo() {
-        return serviceNo;
-    }
-
-    public void setServiceNo(Integer serviceNo) {
-        this.serviceNo = serviceNo;
-    }
-
-    @Override
-    public String toString() {
-        return "CalenderActivity{" +
-                "date=" + date +
-                ", clientName='" + clientName + '\'' +
-                ", serviceNo=" + serviceNo +
-                '}';
+    public void setPriority(String priority) {
+        this.priority = priority;
     }
 }
