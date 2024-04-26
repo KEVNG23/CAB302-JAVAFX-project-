@@ -14,7 +14,7 @@ public class HomeController {
     @FXML
     private void handleCalendarButtonClick(ActionEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("calendar-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo1/calendar-view.fxml"));
             Parent root = fxmlLoader.load();
             Stage stage = new Stage();
             stage.setTitle("Calendar");
@@ -24,6 +24,8 @@ public class HomeController {
             e.printStackTrace();
         }
     }
+
+
 
     // Add other event handler methods for other buttons if needed
 }
