@@ -1,8 +1,9 @@
-package com.example.demo1.Models;
+package com.example.demo1.AccountModel;
 
-import org.mindrot.jbcrypt.BCrypt;
+import com.example.demo1.AccountModel.Account;
+import com.example.demo1.AccountModel.IAccountDAO;
+import com.example.demo1.Models.SqliteConnection;
 
-import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
 /**
  *
  */
-public class SqliteAccountDAO implements IAccountDAO{
+public class SqliteAccountDAO implements IAccountDAO {
     private Connection connection;
 
     /**
