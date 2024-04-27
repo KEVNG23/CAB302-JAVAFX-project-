@@ -13,7 +13,14 @@ module com.example.demo1 {
     opens com.example.demo1.Controller to javafx.fxml;
     exports com.example.demo1.Models;
     opens com.example.demo1.Models to javafx.fxml;
+<<<<<<< HEAD
     exports com.example.demo1.Calendar;
     opens com.example.demo1.Calendar to javafx.fxml;
+=======
+    exports com.example.demo1.AccountController;
+    opens com.example.demo1.AccountController to javafx.fxml;
+    exports com.example.demo1.AccountModel;
+    opens com.example.demo1.AccountModel to javafx.fxml;
+>>>>>>> 975c384bfa087e67f2125257e021789a7168e930
 
 }

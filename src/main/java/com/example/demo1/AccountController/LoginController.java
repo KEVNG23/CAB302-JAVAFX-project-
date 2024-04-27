@@ -1,17 +1,16 @@
-package com.example.demo1.Controller;
+package com.example.demo1.AccountController;
 
-import com.example.demo1.Models.SqliteAccountDAO;
+import com.example.demo1.AccountModel.SqliteAccountDAO;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import com.example.demo1.Main;
 import javafx.fxml.FXML;
-import com.example.demo1.Models.Account;
-import com.example.demo1.Models.MockAccountDAO;
-import org.mindrot.jbcrypt.BCrypt;
+import com.example.demo1.AccountModel.Account;
 
 import java.io.IOException;
+import java.util.List;
 
 public class LoginController {
     @FXML
@@ -47,12 +46,28 @@ public class LoginController {
         String username = usernameField.getText();
         String password = passwordField.getText();
         boolean isLoggedIn = authenticateUser (username, password);
-        if(isLoggedIn){
+        SqliteAccountDAO accountDAO = new SqliteAccountDAO();
+
+        if(!existedAccount(username, accountDAO.getAllAccounts())) {
+            showErrorAlert("Can't find this account");
+            return;
+        }
+        if (isLoggedIn) {
             navigationToHomepage();
-        }else{
+        } else {
             showErrorAlert("Incorrect username or password.");
+
         }
 
+
+    }
+    protected boolean existedAccount(String username, List<Account> accounts) {
+        for (Account account : accounts) {
+            if (account.getUsername().equals(username)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 

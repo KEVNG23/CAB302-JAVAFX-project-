@@ -1,4 +1,7 @@
-package com.example.demo1.Models;
+package com.example.demo1.AccountModel;
+
+import com.example.demo1.AccountModel.Account;
+import com.example.demo1.AccountModel.IAccountDAO;
 
 import java.util.ArrayList;
 import java.util.List;
