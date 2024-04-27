@@ -1,7 +1,7 @@
 package com.example.demo1;
 
 
-import com.example.demo1.Models.CalendarActivity;
+import com.example.demo1.Calendar.CalendarActivity;
 import com.example.demo1.Models.SqliteConnection;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

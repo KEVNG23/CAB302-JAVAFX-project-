@@ -13,5 +13,7 @@ module com.example.demo1 {
     opens com.example.demo1.Controller to javafx.fxml;
     exports com.example.demo1.Models;
     opens com.example.demo1.Models to javafx.fxml;
+    exports com.example.demo1.Calendar;
+    opens com.example.demo1.Calendar to javafx.fxml;
 
 }
