@@ -1,6 +1,5 @@
-package com.example.demo1.Controller;
+package com.example.demo1.Calendar;
 
-import com.example.demo1.Models.CalendarActivity;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;

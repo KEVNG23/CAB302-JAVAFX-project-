@@ -1,7 +1,7 @@
 package com.example.demo1;
 
 
-import com.example.demo1.Models.CalendarActivity;
+import com.example.demo1.Calendar.CalendarActivity;
 import com.example.demo1.Models.SqliteConnection;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -22,7 +22,7 @@ public class Main extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("home-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), WIDTH, HEIGHT);
-        stage.setTitle("Hello!");
+        stage.setTitle("ScreenTrack");
         stage.setScene(scene);
         stage.show();
     }
