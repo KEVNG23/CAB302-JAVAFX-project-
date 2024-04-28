@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6bab2e13-c4be-40c6-a58a-038177b3979c" name="Changes" comment="shaan workspace.xml issues">
-      <change beforePath="$PROJECT_DIR$/screentrack.db" beforeDir="false" afterPath="$PROJECT_DIR$/screentrack.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/Main.java" afterDir="false" />
-    </list>
+    <list default="true" id="6bab2e13-c4be-40c6-a58a-038177b3979c" name="Changes" comment="shaan workspace.xml issues" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
