@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="203.0" prefWidth="282.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.Controller.ActivityDialogController">
+<AnchorPane prefHeight="203.0" prefWidth="282.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.Calendar.ActivityDialogController">
     <VBox alignment="CENTER" prefHeight="203.0" prefWidth="350.0" spacing="10">
         <Label text="Title:" />
         <TextField fx:id="clientNameField" />

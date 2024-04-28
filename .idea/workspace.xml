@@ -4,8 +4,32 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6bab2e13-c4be-40c6-a58a-038177b3979c" name="Changes" comment="commit">
+    <list default="true" id="6bab2e13-c4be-40c6-a58a-038177b3979c" name="Changes" comment="Profile Page Commit">
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_27_04_2024_7_24_pm_[Changes]/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_27_04_2024_7_24_pm__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_27_04_2024_4_29_pm_[Changes]/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_27_04_2024_4_29_pm__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/mysql-connector-j-8.3.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/HelloApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/HelloController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/Timer/CountdownController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/Timer/CountdownTimer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/Timer/CountdownViewController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/Timer/StopwatchController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/Timer/TimerController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo1/countdown-view.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo1/hello-view1.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo1/stopwatch-view.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo1/timer-view.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/ProfileTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/Controller/ActivityDialogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/Calendar/ActivityDialogController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/Controller/CalendarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/Calendar/CalendarController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/Models/CalendarActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/Calendar/CalendarActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo1/activity-dialog.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo1/activity-dialog.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo1/calendar-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo1/calendar-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,7 +47,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="Dat" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -53,7 +77,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "quyen",
+    "git-widget-placeholder": "Merging quyen",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/nguye/OneDrive/Desktop/CAB302/demo1",
@@ -68,7 +92,7 @@
       <recent name="com.example.demo1" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="Application.HelloApplication">
     <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.demo1.HelloApplication" />
       <module name="demo1" />
@@ -97,8 +121,6 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
-        <item itemvalue="Application.HelloApplication" />
         <item itemvalue="Application.HelloApplication" />
         <item itemvalue="Application.Main" />
       </list>
@@ -120,15 +142,6 @@
       <option name="presentableId" value="Default" />
       <updated>1712923910778</updated>
     </task>
-    <task id="LOCAL-00001" summary="commit">
-      <option name="closed" value="true" />
-      <created>1714299612605</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1714299612605</updated>
-    </task>
-    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -156,8 +169,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Profile Page Commit" />
-    <MESSAGE value="workspace file error" />
-    <MESSAGE value="commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Profile Page Commit" />
   </component>
 </project>
