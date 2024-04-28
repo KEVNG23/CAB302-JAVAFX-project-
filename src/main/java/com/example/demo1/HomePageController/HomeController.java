@@ -1,5 +1,6 @@
-package com.example.demo1.HomeController;
+package com.example.demo1.HomePageController;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -7,9 +8,47 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
-
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 public class HomeController {
 
+    @FXML
+    private TableView<String> taskTable;
+
+    @FXML
+    private TableColumn<String, String> taskColumn;
+
+    @FXML
+    private TextField taskField;
+
+
+    @FXML
+    private void initialize() {
+        // Set up the task column
+        taskColumn.setCellValueFactory(cellData -> {
+            String value = cellData.getValue(); // Get the value of the cell
+            return new SimpleStringProperty(value); // Convert the value to an ObservableValue
+        });
+    }
+
+
+    @FXML
+    private void handleAddTask() {
+        String newTask = taskField.getText().trim();
+        if (!newTask.isEmpty()) {
+            taskTable.getItems().add(newTask);
+            taskField.clear();
+        }
+    }
+
+    @FXML
+    private void handleRemoveTask() {
+        int selectedIndex = taskTable.getSelectionModel().getSelectedIndex();
+        if (selectedIndex >= 0) {
+            taskTable.getItems().remove(selectedIndex);
+        }
+    }
     @FXML
     private void handleCalendarButtonClick(ActionEvent event) {
         try {
@@ -39,7 +78,6 @@ public class HomeController {
         }
     }
 
-
     @FXML
     private void handleProfileButtonClick(ActionEvent event) {
         try {
@@ -54,8 +92,5 @@ public class HomeController {
         }
     }
 
-
-
     // Add other event handler methods for other buttons if needed
 }
-
