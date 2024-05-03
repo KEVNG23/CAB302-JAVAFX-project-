@@ -8,8 +8,8 @@ target/
 .idea/jarRepositories.xml
 .idea/compiler.xml
 .idea/libraries/
+.idea/shelf/
 .idea/workspace.xml
-.idea/shelf
 *.iws
 *.iml
 *.ipr
