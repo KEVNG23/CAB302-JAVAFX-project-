@@ -22,4 +22,7 @@ module com.example.demo1 {
     exports com.example.demo1.AccountModel;
     opens com.example.demo1.AccountModel to javafx.fxml;
 
+    exports com.example.demo1.Timer;
+    opens com.example.demo1.Timer to javafx.fxml;
+
 }
