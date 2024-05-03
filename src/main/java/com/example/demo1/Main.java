@@ -20,9 +20,9 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("login-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/com/example/demo1/login-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), WIDTH, HEIGHT);
-        stage.setTitle("Hello!");
+        stage.setTitle("ScreenTrack");
         stage.setScene(scene);
         stage.show();
     }
