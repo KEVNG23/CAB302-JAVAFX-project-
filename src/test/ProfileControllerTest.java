@@ -7,8 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
-
+import com.example.demo1.ProfileController;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
@@ -25,9 +24,10 @@ public class ProfileControllerTest {
 
     @BeforeEach
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-        controller = new ProfileController();
-        controller.setAccountDAO(accountDAO);
+        MockitoAnnotations.openMocks(this); // Updated method call
+
+        // Provide a mock of SqliteAccountDAO when creating ProfileController
+        controller = new ProfileController(accountDAO);
         usernameField = new TextField();
         passwordField = new PasswordField();
         emailField = new TextField();

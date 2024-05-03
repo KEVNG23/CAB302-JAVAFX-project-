@@ -17,8 +17,27 @@ public class ProfileController {
 
     private SqliteAccountDAO accountDAO;
 
+    public ProfileController(SqliteAccountDAO accountDAO) {
+        this.accountDAO = accountDAO;
+    }
     public ProfileController() {
         this.accountDAO = new SqliteAccountDAO();
+    }
+
+    public void setUsernameField(TextField usernameField) {
+        this.usernameField = usernameField;
+    }
+
+    public void setPasswordField(PasswordField passwordField) {
+        this.passwordField = passwordField;
+    }
+
+    public void setEmailField(TextField emailField) {
+        this.emailField = emailField;
+    }
+
+    public void setMessageArea(TextArea messageArea) {
+        this.messageArea = messageArea;
     }
 
     @FXML
@@ -34,7 +53,7 @@ public class ProfileController {
     }
 
     @FXML
-    protected void onSaveChanges() {
+    public void onSaveChanges() {
         String newUsername = usernameField.getText();
         String newPassword = passwordField.getText();
         String newEmail = emailField.getText();
