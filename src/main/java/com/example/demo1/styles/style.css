@@ -1,0 +1,40 @@
+.root {
+    -fx-font-family: 'Arial';
+    -fx-base: #FFFFFF;
+    -fx-background: #F0F0F0;
+}
+
+.label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #333333;
+}
+
+.button {
+    -fx-background-color: #5CACEE, linear-gradient(#6CADDF 50%, #5CACEE 100%), linear-gradient(#AFC6E9 0%, #6CADDF 100%);
+    -fx-background-insets: 0,1,2;
+    -fx-background-radius: 3,2,1;
+    -fx-padding: 3 30 3 30;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+}
+
+.button:hover {
+    -fx-background-color: #3D8EB9, linear-gradient(#529ECC 50%, #3D8EB9 100%), linear-gradient(#7CA7D0 0%, #529ECC 100%);
+}
+
+.text-field {
+    -fx-background-color: #ffffff;
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+    -fx-background-radius: 3,2,1;
+    -fx-padding: 3 5 3 5;
+}
+
+.text-area {
+    -fx-background-color: #ffffff;
+}
+
+.title {
+     -fx-font-size: 20px;
+     -fx-font-weight: bold;
+     -fx-text-fill: #333333;
+}
