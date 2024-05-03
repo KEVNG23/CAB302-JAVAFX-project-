@@ -63,7 +63,7 @@ public class CalendarController implements Initializable {
 
     @FXML
     void addNewActivity(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("activity-dialog.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo1/activity-dialog.fxml"));
         Parent root = loader.load();
 
         // Get the controller of the activity dialog

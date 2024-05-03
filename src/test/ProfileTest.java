@@ -1,13 +1,8 @@
-import com.example.demo1.AccountModel.SqliteAccountDAO;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
+import com.example.demo1.HelloController;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.testfx.framework.junit5.ApplicationTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
