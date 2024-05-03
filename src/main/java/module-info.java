@@ -7,10 +7,10 @@ module com.example.demo1 {
 
 
     exports com.example.demo1;
-    exports com.example.demo1.HomePageController;
+    exports com.example.demo1.HomeController;
 
     opens com.example.demo1 to javafx.fxml;
-    opens com.example.demo1.HomePageController to javafx.fxml;
+    opens com.example.demo1.HomeController to javafx.fxml;
     exports com.example.demo1.Models;
     opens com.example.demo1.Models to javafx.fxml;
 
