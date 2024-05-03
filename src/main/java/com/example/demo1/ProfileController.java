@@ -5,7 +5,7 @@ import com.example.demo1.AccountModel.SqliteAccountDAO;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-public class HelloController {
+public class ProfileController {
     @FXML
     private TextField usernameField;
     @FXML
@@ -17,7 +17,7 @@ public class HelloController {
 
     private SqliteAccountDAO accountDAO;
 
-    public HelloController() {
+    public ProfileController() {
         this.accountDAO = new SqliteAccountDAO();
     }
 
