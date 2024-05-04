@@ -11,7 +11,7 @@ import javafx.scene.control.TextField;
 
 public class StopwatchController {
     @FXML
-    private TextField stopwatchLabel;
+    public TextField stopwatchLabel;
 
     private long startTime = 0;
     private long pausedTime = 0;
@@ -19,7 +19,7 @@ public class StopwatchController {
     private boolean running = false;
 
     @FXML
-    private void onStopStartClick() {
+    public void onStopStartClick() {
         change();
         if (running) {
             pauseTimer();
