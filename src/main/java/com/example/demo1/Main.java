@@ -15,7 +15,7 @@ public class Main extends Application {
 
     public static final int WIDTH = 600;
 
-    public static final int HEIGHT = 400;
+    public static final int HEIGHT = 420;
     private CalendarActivity primaryStage;
 
     @Override
