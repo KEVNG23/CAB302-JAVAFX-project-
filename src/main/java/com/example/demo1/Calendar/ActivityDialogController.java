@@ -54,7 +54,7 @@ public class ActivityDialogController {
         }
 
         // Create the activity
-        CalendarActivity newCalendarActivity = new CalendarActivity(title, date, priority);
+        CalendarActivity newCalendarActivity = new CalendarActivity(null, title, date, priority);
 
         // Pass the new activity to the calendarController
         if (calendarController != null) {

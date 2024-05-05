@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+
+
 public class CalendarController implements Initializable {
 
     ZonedDateTime dateFocus;
@@ -36,6 +38,8 @@ public class CalendarController implements Initializable {
 
     @FXML
     private FlowPane calendar;
+
+    private SqliteCalendarDAO calendarDAO;
 
 
     @Override
@@ -80,9 +84,11 @@ public class CalendarController implements Initializable {
     }
 
     public void addActivity(CalendarActivity calendarActivity) {
+        calendarDAO.addActivity(calendarActivity); // Store the activity in the database
         activities.add(calendarActivity);
         drawCalendar(); // Redraw the calendar after adding the activity
     }
+
 
     private StackPane createDayPane(Rectangle rectangle, Text dateText) {
         StackPane stackPane = new StackPane();
@@ -97,6 +103,9 @@ public class CalendarController implements Initializable {
 
         year.setText(String.valueOf(dateFocus.getYear()));
         month.setText(String.valueOf(dateFocus.getMonth()));
+
+        // Fetch activities from the database
+        activities = calendarDAO.getAllActivity();
 
         double calendarWidth = calendar.getPrefWidth();
         double calendarHeight = calendar.getPrefHeight();
