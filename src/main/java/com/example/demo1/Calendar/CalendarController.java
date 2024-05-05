@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+
+
 public class CalendarController implements Initializable {
 
     ZonedDateTime dateFocus;
@@ -37,6 +39,11 @@ public class CalendarController implements Initializable {
     @FXML
     private FlowPane calendar;
 
+    private ICalendarDAO calendarDAO;
+
+    public CalendarController(){
+        this.calendarDAO = new SqliteCalendarDAO();
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -80,9 +87,11 @@ public class CalendarController implements Initializable {
     }
 
     public void addActivity(CalendarActivity calendarActivity) {
+        calendarDAO.addActivity(calendarActivity); // Store the activity in the database
         activities.add(calendarActivity);
         drawCalendar(); // Redraw the calendar after adding the activity
     }
+
 
     private StackPane createDayPane(Rectangle rectangle, Text dateText) {
         StackPane stackPane = new StackPane();
@@ -97,6 +106,9 @@ public class CalendarController implements Initializable {
 
         year.setText(String.valueOf(dateFocus.getYear()));
         month.setText(String.valueOf(dateFocus.getMonth()));
+
+        // Fetch activities from the database
+        activities = calendarDAO.getAllActivity();
 
         double calendarWidth = calendar.getPrefWidth();
         double calendarHeight = calendar.getPrefHeight();
@@ -171,7 +183,7 @@ public class CalendarController implements Initializable {
         }
     }
 
-    private List<CalendarActivity> getActivitiesOnDate(LocalDate date) {
+    public List<CalendarActivity> getActivitiesOnDate(LocalDate date) {
         List<CalendarActivity> activitiesOnDate = new ArrayList<>();
         for (CalendarActivity calendarActivity : activities) {
             if (calendarActivity.getDate().equals(date)) {
