@@ -39,8 +39,11 @@ public class CalendarController implements Initializable {
     @FXML
     private FlowPane calendar;
 
-    private SqliteCalendarDAO calendarDAO;
+    private ICalendarDAO calendarDAO;
 
+    public CalendarController(){
+        this.calendarDAO = new SqliteCalendarDAO();
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

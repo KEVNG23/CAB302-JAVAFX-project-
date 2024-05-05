@@ -26,9 +26,9 @@ public class SqliteCalendarDAO implements ICalendarDAO {
             Statement statement = connection.createStatement();
             String query = "CREATE TABLE IF NOT EXISTS Activity ("
                     + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
-                    + "Title VARCHAR NOT NULL,"
-                    + "Date VARCHAR NOT NULL,"
-                    + "Priority VARCHAR NOT NULL"
+                    + "title VARCHAR NOT NULL,"
+                    + "date VARCHAR NOT NULL,"
+                    + "priority VARCHAR NOT NULL"
                     + ")";
             statement.execute(query);
         } catch (Exception e) {
@@ -41,7 +41,7 @@ public class SqliteCalendarDAO implements ICalendarDAO {
     @Override
     public void addActivity(CalendarActivity calendarActivity) {
         try{
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO accounts (username, email, password) VALUES (?, ?, ?)");
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO activity (title, date, priority) VALUES (?, ?, ?)");
             statement.setString(1, calendarActivity.getTitle());
             statement.setDate(2, Date.valueOf(calendarActivity.getDate()));
             statement.setString(3, calendarActivity.getPriority());
@@ -86,7 +86,7 @@ public class SqliteCalendarDAO implements ICalendarDAO {
         List<CalendarActivity> calendarActivities = new ArrayList<>();
         try {
             Statement statement = connection.createStatement();
-            String query = "SELECT * FROM accounts";
+            String query = "SELECT * FROM activity";
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
