@@ -6,11 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6bab2e13-c4be-40c6-a58a-038177b3979c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screentrack.db" beforeDir="false" afterPath="$PROJECT_DIR$/screentrack.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/Calendar/CalendarActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/Calendar/CalendarActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/Calendar/CalendarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/Calendar/CalendarController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/CalendarControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/CalendarControllerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +61,7 @@
     "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.CalendarControllerTest">
+  <component name="RunManager">
     <configuration name="AccountTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="demo1" />
       <option name="PACKAGE_NAME" value="" />
