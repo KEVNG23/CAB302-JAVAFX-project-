@@ -4,12 +4,17 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.HomePageController.HomeController">
    <children>
       <VBox alignment="CENTER" prefHeight="400.0" prefWidth="100.0" spacing="10.0">
@@ -37,25 +42,52 @@
          </children></VBox>
       <VBox layoutX="100.0" prefHeight="400.0" prefWidth="394.0" spacing="10.0">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Hello, username!">
+            <Text fx:id="usernameText" strokeType="OUTSIDE" strokeWidth="0.0">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Daily Quote: &quot;???&quot;">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Daily Quote: &quot;We need to create a culture of digital &#10;mindfulness, where we consciously choose how we &#10;engage with technology rather than letting it &#10;dictate our lives.&quot; - Dr. Larry Rosen.">
                <font>
                   <Font name="System Italic" size="12.0" />
                </font>
             </Text>
-            <TextField fx:id="taskField" promptText="Enter task"/>
-            <Button text="Add Task" onAction="#handleAddTask"/>
+            <TextField fx:id="taskField" promptText="Enter task" />
+            <HBox>
+               <Label text="Time Frame:" />
+               <ComboBox fx:id="timeFrameComboBox" promptText="Select time frame">
+                  <items>
+                     <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="30 minutes" />
+                        <String fx:value="1 hour" />
+                        <String fx:value="2 hours" />
+                        <!-- Add more options as needed -->
+                     </FXCollections>
+                  </items>
+               </ComboBox>
+            </HBox>
+            <HBox>
+               <Label text="Urgency:" />
+               <ComboBox fx:id="urgencyComboBox" promptText="Select urgency">
+                  <items>
+                     <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="Low" />
+                        <String fx:value="Medium" />
+                        <String fx:value="High" />
+                        <!-- Add more options as needed -->
+                     </FXCollections>
+                  </items>
+               </ComboBox>
+            </HBox>
+            <Button onAction="#handleAddTask" text="Add Task" />
             <TableView fx:id="taskTable" prefHeight="200.0" prefWidth="200.0">
                <columns>
-                  <TableColumn prefWidth="200.0" text="Tasks" fx:id="taskColumn" />
-                  <TableColumn prefWidth="100.0" text="Time" fx:id="timeColumn" />
+                  <TableColumn fx:id="taskColumn" prefWidth="150.0" text="Tasks" />
+                  <TableColumn fx:id="timeColumn" prefWidth="100.0" text="Time" />
+                  <TableColumn fx:id="urgencyColumn" prefWidth="100.0" text="Urgency" />
                </columns>
             </TableView>
-            <Button text="Remove Task" onAction="#handleRemoveTask"/>
+            <Button onAction="#handleRemoveTask" text="Remove Task" />
          </children>
       </VBox>
    </children>
