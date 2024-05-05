@@ -5,6 +5,7 @@ import com.example.demo1.Calendar.CalendarActivity;
 import com.example.demo1.Models.SqliteConnection;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -20,11 +21,17 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/com/example/demo1/login-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), WIDTH, HEIGHT);
-        stage.setTitle("ScreenTrack");
-        stage.setScene(scene);
-        stage.show();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo1/calendar.fxml"));
+        loader.setController(this); // Set the controller instance (optional)
+        Parent root = loader.load(); // Load the FXML file
+
+        // Optionally, get the controller instance if needed
+        // CalendarController controller = loader.getController();
+
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Calendar App");
+
     }
 
 
