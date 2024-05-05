@@ -183,7 +183,7 @@ public class CalendarController implements Initializable {
         }
     }
 
-    private List<CalendarActivity> getActivitiesOnDate(LocalDate date) {
+    public List<CalendarActivity> getActivitiesOnDate(LocalDate date) {
         List<CalendarActivity> activitiesOnDate = new ArrayList<>();
         for (CalendarActivity calendarActivity : activities) {
             if (calendarActivity.getDate().equals(date)) {
