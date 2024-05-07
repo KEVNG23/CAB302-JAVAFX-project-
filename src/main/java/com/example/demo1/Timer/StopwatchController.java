@@ -72,17 +72,21 @@ public class StopwatchController {
 
     @FXML
     private void onResetClick() {
-        if (running) {
-            pauseTimer();
-        }
         resetTimer();
+        pauseTimer();
     }
 
     private void resetTimer() {
-        running = false;
         pausedTime = 0;
-        onStopStartClick();
-        btnStart.setText("PAUSE");
+        stopwatchLabel.setText("00:00.00");
+        if (running) {
+            startTime = System.currentTimeMillis(); // Restart the timer from the current time
+            running = true; // Set running flag to true
+            timer.start(); // Resume the timer
+            btnStart.setText("START"); // Update button text
+        } else {
+            btnStart.setText("START"); // Reset button text if not running
+        }
     }
 
     @FXML
