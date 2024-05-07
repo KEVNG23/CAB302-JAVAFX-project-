@@ -1,5 +1,6 @@
 package com.example.demo1.HomePageController;
 
+import com.example.demo1.Main;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.event.ActionEvent;
@@ -10,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 public class HomeController {
@@ -36,6 +38,9 @@ public class HomeController {
 
     @FXML
     private Text usernameText; // Add Text element for displaying username
+
+    @FXML
+    private Button onLogout;
 
     private DatabaseHandler databaseHandler;
 
@@ -168,5 +173,15 @@ public class HomeController {
         }
     }
 
-    // Add other event handler methods for other buttons if needed
-}
+    @FXML
+    protected void onLogoutButtonClick() {
+        Stage stage = (Stage) onLogout.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("login-view.fxml"));
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load(), Main.WIDTH, Main.HEIGHT); //change to Homepage size
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        stage.setScene(scene);
+    }}
