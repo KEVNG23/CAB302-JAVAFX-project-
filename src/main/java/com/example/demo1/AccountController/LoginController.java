@@ -11,7 +11,7 @@ import com.example.demo1.AccountModel.Account;
 
 import java.io.IOException;
 import java.util.List;
-
+import java.util.prefs.Preferences;
 public class LoginController {
     @FXML
     private TextField usernameField;
@@ -40,26 +40,26 @@ public class LoginController {
         onLoginButtonClick();
     }
 
-
+    private static final String SESSION_USERNAME_KEY = "loggedInUsername";
     @FXML
     protected void onLoginButtonClick() {
         String username = usernameField.getText();
         String password = passwordField.getText();
-        boolean isLoggedIn = authenticateUser (username, password);
+        boolean isLoggedIn = authenticateUser(username, password);
         SqliteAccountDAO accountDAO = new SqliteAccountDAO();
 
-        if(!existedAccount(username, accountDAO.getAllAccounts())) {
+        if (!existedAccount(username, accountDAO.getAllAccounts())) {
             showErrorAlert("Can't find this account");
             return;
         }
         if (isLoggedIn) {
+            // Store the logged-in user's username in the session
+            Preferences.userRoot().put(SESSION_USERNAME_KEY, username);
+
             navigationToHomepage();
         } else {
             showErrorAlert("Incorrect username or password.");
-
         }
-
-
     }
     protected boolean existedAccount(String username, List<Account> accounts) {
         for (Account account : accounts) {

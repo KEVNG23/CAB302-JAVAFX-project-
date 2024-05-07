@@ -5,39 +5,77 @@ import com.example.demo1.AccountModel.SqliteAccountDAO;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import java.util.prefs.Preferences;
+
 public class ProfileController {
     @FXML
-    private TextField usernameField;
+    public TextField usernameField;
     @FXML
-    private PasswordField passwordField;
+    public PasswordField passwordField;
     @FXML
-    private TextField emailField;
+    public TextField emailField;
     @FXML
-    private TextArea messageArea;
+    public TextArea messageArea;
 
     private SqliteAccountDAO accountDAO;
+    private Account currentUser;
+
+    private static final String SESSION_USERNAME_KEY = "loggedInUsername";
+    public static String getSessionUsernameKey() {
+        return SESSION_USERNAME_KEY;
+    }
 
     public ProfileController(SqliteAccountDAO accountDAO) {
         this.accountDAO = accountDAO;
     }
+
     public ProfileController() {
         this.accountDAO = new SqliteAccountDAO();
     }
 
-    public void setUsernameField(TextField usernameField) {
-        this.usernameField = usernameField;
+    @FXML
+    public void initialize() {
+        currentUser = retrieveCurrentUser();
+        updateUIFields();
     }
 
-    public void setPasswordField(PasswordField passwordField) {
-        this.passwordField = passwordField;
+    private Account retrieveCurrentUser() {
+        String loggedInUsername = getLoggedInUsername();
+        if (loggedInUsername != null) {
+            return accountDAO.getAccount(loggedInUsername);
+        }
+        return null;
     }
 
-    public void setEmailField(TextField emailField) {
-        this.emailField = emailField;
+    private String getLoggedInUsername() {
+        return Preferences.userRoot().get(SESSION_USERNAME_KEY, null);
     }
 
-    public void setMessageArea(TextArea messageArea) {
-        this.messageArea = messageArea;
+    private void updateUIFields() {
+        if (currentUser != null) {
+            usernameField.setText(currentUser.getUsername());
+            emailField.setText(currentUser.getEmail());
+        } else {
+            usernameField.clear();
+            passwordField.clear();
+            emailField.clear();
+        }
+    }
+
+    public void setUsernameField(String username) {
+        usernameField.setText(username);
+    }
+
+    public void setPasswordField(String password) {
+        passwordField.setText(password);
+    }
+
+    public void setEmailField(String email) {
+        emailField.setText(email);
+    }
+
+    public String getMessageAreaText() {
+        return messageArea.getText();
     }
 
     @FXML
@@ -54,21 +92,21 @@ public class ProfileController {
 
     @FXML
     public void onSaveChanges() {
-        String newUsername = usernameField.getText();
-        String newPassword = passwordField.getText();
-        String newEmail = emailField.getText();
+        // Retrieve the currently logged-in user's information from the session
+        currentUser = retrieveCurrentUser();
 
-        Account account = accountDAO.getAccount(newUsername);
-        if (account == null) {
-            messageArea.setText("User does not exist.");
+        if (currentUser == null) {
+            messageArea.setText("Please log in.");
             return;
         }
 
-        account.setUsername(newUsername);
-        account.setPassword(newPassword);
-        account.setEmail(newEmail);
+        String newPassword = passwordField.getText();
+        String newEmail = emailField.getText();
 
-        accountDAO.updateAccount(account);
+        currentUser.setPassword(newPassword);
+        currentUser.setEmail(newEmail);
+
+        accountDAO.updateAccount(currentUser);
         messageArea.setText("Changes saved successfully.");
     }
 }
