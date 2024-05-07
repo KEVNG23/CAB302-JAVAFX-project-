@@ -25,10 +25,6 @@ public class ProfileController {
         return SESSION_USERNAME_KEY;
     }
 
-    public ProfileController(SqliteAccountDAO accountDAO) {
-        this.accountDAO = accountDAO;
-    }
-
     public ProfileController() {
         this.accountDAO = new SqliteAccountDAO();
     }
@@ -62,21 +58,6 @@ public class ProfileController {
         }
     }
 
-    public void setUsernameField(String username) {
-        usernameField.setText(username);
-    }
-
-    public void setPasswordField(String password) {
-        passwordField.setText(password);
-    }
-
-    public void setEmailField(String email) {
-        emailField.setText(email);
-    }
-
-    public String getMessageAreaText() {
-        return messageArea.getText();
-    }
 
     @FXML
     protected void onChangePassword() {
