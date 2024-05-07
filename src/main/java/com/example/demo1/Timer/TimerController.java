@@ -21,7 +21,7 @@ public class TimerController {
     private Parent root;
 
     public void switchToStopwatchPage(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/com/example/demo1/stopwatch-view.fxml"));
+        root = FXMLLoader.load(getClass().getResource("stopwatch-view.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -97,7 +97,7 @@ public class TimerController {
         int seconds = hours * 3600 + minutes * 60;
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo1/countdown-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("countdown-view.fxml"));
             Parent root = loader.load();
 
             CountdownViewController controller = loader.getController();
