@@ -40,3 +40,4 @@ build/
 
 ### Database ###
 screentrack.db
+/docs/javadoc/
