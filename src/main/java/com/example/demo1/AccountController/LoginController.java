@@ -12,6 +12,10 @@ import com.example.demo1.AccountModel.Account;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * The LoginController class manages the functionality of the login screen.
+ * It handles user authentication, navigation to the homepage, and displaying error alerts.
+ */
 public class LoginController {
     @FXML
     private TextField usernameField;
@@ -21,11 +25,11 @@ public class LoginController {
     private Button loginButton;
     @FXML
     private Hyperlink registerLink;
-
-
     private SqliteAccountDAO accountDAO;
 
-
+    /**
+     * Initializes the controller. Sets up event handlers for login, register, and enter key press.
+     */
     @FXML
     public void initialize(){
         this.accountDAO = new SqliteAccountDAO();
@@ -35,12 +39,17 @@ public class LoginController {
         passwordField.setOnAction(event -> onEnterKeyPressed());
     }
 
+    /**
+     * Handles enter key press events.
+     */
     @FXML
     protected void onEnterKeyPressed(){
         onLoginButtonClick();
     }
 
-
+    /**
+     * Handles login button click events.
+     */
     @FXML
     protected void onLoginButtonClick() {
         String username = usernameField.getText();
@@ -61,6 +70,13 @@ public class LoginController {
 
 
     }
+
+    /**
+     * Checks if the account with the given username exists.
+     * @param username The username to check.
+     * @param accounts The list of accounts to search in.
+     * @return True if the account exists, otherwise false.
+     */
     protected boolean existedAccount(String username, List<Account> accounts) {
         for (Account account : accounts) {
             if (account.getUsername().equals(username)) {
@@ -70,8 +86,9 @@ public class LoginController {
         return false;
     }
 
-
-
+    /**
+     * Navigates to the homepage upon successful login.
+     */
     @FXML
     protected void navigationToHomepage() {
         Stage stage = (Stage) loginButton.getScene().getWindow();
@@ -85,6 +102,9 @@ public class LoginController {
         stage.setScene(scene);
     }
 
+    /**
+     * Handles register link click events.
+     */
     @FXML
     protected void onRegisterLinkClick(){
         Stage stage = (Stage) registerLink.getScene().getWindow();
@@ -101,10 +121,10 @@ public class LoginController {
 
 
     /**
-     *
-     * @param username
-     * @param password
-     * @return
+     * Authenticates the user with the provided username and password.
+     * @param username The username of the user.
+     * @param password The password of the user.
+     * @return True if the authentication is successful, otherwise false.
      */
     public boolean authenticateUser(String username, String password) {
         System.out.println("Attempting to authenticate user: " + username);
@@ -125,13 +145,9 @@ public class LoginController {
         return false;
     }
 
-
-
-
-
     /**
-     *
-     * @param message
+     * Displays an error alert with the given message.
+     * @param message The error message to display.
      */
     private void showErrorAlert(String message) {
         Alert alert = new Alert (Alert.AlertType.ERROR);
