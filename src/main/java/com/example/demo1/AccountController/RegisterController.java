@@ -15,6 +15,10 @@ import com.example.demo1.Main;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * The RegisterController class manages the functionality of the user registration screen.
+ * It handles user registration, password validation, navigation to the login screen, and displaying error alerts.
+ */
 public class RegisterController {
     @FXML
     private TextField usernameField;
@@ -36,6 +40,9 @@ public class RegisterController {
 
     private SqliteAccountDAO account;
 
+    /**
+     * Initializes the controller. Sets up event handlers for register, login link, and enter key press.
+     */
     @FXML
     public void initialize(){
         account = new SqliteAccountDAO();
@@ -47,11 +54,17 @@ public class RegisterController {
         confirmPasswordField.setOnAction(event -> onEnterKeyPressed());
     }
 
+    /**
+     * Handles enter key press events.
+     */
     @FXML
     protected void onEnterKeyPressed(){
         onRegisterButtonClick();
     }
 
+    /**
+     * Navigates to the login screen.
+     */
     @FXML
     protected void navigationToLogin() {
         Stage stage = (Stage) registerButton.getScene().getWindow();
@@ -65,7 +78,9 @@ public class RegisterController {
         stage.setScene(scene);
     }
 
-
+    /**
+     * Handles register button click events.
+     */
     @FXML
     protected void onRegisterButtonClick() {
         String username = usernameField.getText();
@@ -94,20 +109,20 @@ public class RegisterController {
     }
 
     /**
-     * boolean method check the user is entered the same password
-     * @param password get String value from password
-     * @param confirmPassword get String value from confirm password
-     * @return true if the password and confirmPassword is equal, else return false
+     * Checks if the password and confirm password fields match.
+     * @param password The password entered by the user.
+     * @param confirmPassword The confirmed password entered by the user.
+     * @return True if passwords match, otherwise false.
      */
     protected boolean confirmedPasswordCheck(String password, String confirmPassword) {
         return confirmPassword.equals(password);
     }
 
     /**
-     *
-     * @param username
-     * @param accounts
-     * @return
+     * Checks if an account with the given username already exists.
+     * @param username The username to check.
+     * @param accounts The list of accounts to search in.
+     * @return True if the account exists, otherwise false.
      */
     protected boolean existedAccount(String username, List<Account> accounts) {
         for (Account account : accounts) {
@@ -118,8 +133,9 @@ public class RegisterController {
         return false;
     }
 
-
-
+    /**
+     * Handles login link click events.
+     */
     @FXML
     protected void onLoginLinkClick() {
         Stage stage = (Stage) loginLink.getScene().getWindow();
@@ -133,6 +149,10 @@ public class RegisterController {
         stage.setScene(scene);
     }
 
+    /**
+     * Displays an error alert with the given message.
+     * @param message The error message to display.
+     */
     private void showErrorAlert(String message) {
         Alert alert = new Alert (Alert.AlertType.ERROR);
         alert.setTitle("Error");
