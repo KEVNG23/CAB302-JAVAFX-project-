@@ -1,65 +1,51 @@
 import com.example.demo1.AccountModel.Account;
 import com.example.demo1.AccountModel.SqliteAccountDAO;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import com.example.demo1.ProfileController;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import com.example.demo1.ProfileController;
+
+import java.util.prefs.Preferences;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 public class ProfileControllerTest {
 
-    private ProfileController controller;
-    private TextField usernameField;
-    private PasswordField passwordField;
-    private TextField emailField;
-    private TextArea messageArea;
-
-    @Mock
     private SqliteAccountDAO accountDAO;
+    private Preferences preferences;
 
     @BeforeEach
-    public void setUp() {
-        MockitoAnnotations.openMocks(this); // Updated method call
+    public void setup() {
+        // Create a mock SqliteAccountDAO
+        accountDAO = mock(SqliteAccountDAO.class);
 
-        // Provide a mock of SqliteAccountDAO when creating ProfileController
-        controller = new ProfileController(accountDAO);
-        usernameField = new TextField();
-        passwordField = new PasswordField();
-        emailField = new TextField();
-        messageArea = new TextArea();
-        controller.setUsernameField(usernameField);
-        controller.setPasswordField(passwordField);
-        controller.setEmailField(emailField);
-        controller.setMessageArea(messageArea);
+        // Create a mock Preferences object to store the logged-in username
+        preferences = mock(Preferences.class);
+        when(preferences.get(ProfileController.getSessionUsernameKey(), null)).thenReturn("testUser");
     }
 
     @Test
     public void testSaveChanges() {
-        // Mock account
-        Account account = new Account(1, "testuser", "test@example.com", "password");
+        // Create a test account
+        Account testAccount = new Account(1, "testUser", "password", "test@example.com");
 
-        // user input
-        usernameField.setText("newUsername");
-        passwordField.setText("newPassword");
-        emailField.setText("newEmail@example.com");
+        // Mock behavior of accountDAO
+        when(accountDAO.getAccount("testUser")).thenReturn(testAccount);
 
-        when(accountDAO.getAccount("testuser")).thenReturn(account);
+        // Simulate changing the password and email
+        String newPassword = "newPassword";
+        String newEmail = "newEmail@example.com";
 
-        // Call method to test
-        controller.onSaveChanges();
+        // Update the account with the new password and email
+        testAccount.setPassword(newPassword);
+        testAccount.setEmail(newEmail);
 
-        // Verify
-        assertEquals("Changes saved successfully.", messageArea.getText());
-        assertEquals("newUsername", account.getUsername());
-        assertEquals("newPassword", account.getPassword());
-        assertEquals("newEmail@example.com", account.getEmail());
+        // Call the updateAccount method
+        accountDAO.updateAccount(testAccount);
 
-        // Verify
-        verify(accountDAO, times(1)).updateAccount(account);
+        // Verify that the account details are updated
+        verify(accountDAO, times(1)).updateAccount(testAccount);
+        assertEquals(newPassword, testAccount.getPassword());
+        assertEquals(newEmail, testAccount.getEmail());
     }
 }

@@ -16,6 +16,7 @@ import java.util.List;
  * The LoginController class manages the functionality of the login screen.
  * It handles user authentication, navigation to the homepage, and displaying error alerts.
  */
+import java.util.prefs.Preferences;
 public class LoginController {
     @FXML
     private TextField usernameField;
@@ -50,25 +51,26 @@ public class LoginController {
     /**
      * Handles login button click events.
      */
+    private static final String SESSION_USERNAME_KEY = "loggedInUsername";
     @FXML
     protected void onLoginButtonClick() {
         String username = usernameField.getText();
         String password = passwordField.getText();
-        boolean isLoggedIn = authenticateUser (username, password);
+        boolean isLoggedIn = authenticateUser(username, password);
         SqliteAccountDAO accountDAO = new SqliteAccountDAO();
 
-        if(!existedAccount(username, accountDAO.getAllAccounts())) {
+        if (!existedAccount(username, accountDAO.getAllAccounts())) {
             showErrorAlert("Can't find this account");
             return;
         }
         if (isLoggedIn) {
+            // Store the logged-in user's username in the session
+            Preferences.userRoot().put(SESSION_USERNAME_KEY, username);
+
             navigationToHomepage();
         } else {
             showErrorAlert("Incorrect username or password.");
-
         }
-
-
     }
 
     /**

@@ -4,6 +4,7 @@ module com.example.demo1 {
     requires java.datatransfer;
     requires jbcrypt;
     requires java.sql;
+    requires java.prefs;
 
 
     exports com.example.demo1;

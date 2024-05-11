@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="com.example.demo1.ProfileController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.ProfileController">
   <children>
     <VBox layoutX="150.0" layoutY="50.0" spacing="10.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
       <children>
@@ -37,12 +37,7 @@
             <Button onAction="#onChangeEmail" text="Change" />
           </children>
         </HBox>
-        <HBox spacing="15.0">
-          <children>
-            <Label text="Time Spent:" />
-            <Label fx:id="timeSpentLabel" text="00:00:00" />
-          </children>
-        </HBox>
+        <HBox spacing="15.0" />
         <Button onAction="#onSaveChanges" text="Save Changes" />
         <TextArea fx:id="messageArea" editable="false" prefHeight="37.0" prefWidth="200.0" wrapText="true" />
       </children>
