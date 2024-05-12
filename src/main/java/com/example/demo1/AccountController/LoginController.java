@@ -12,11 +12,12 @@ import com.example.demo1.AccountModel.Account;
 import java.io.IOException;
 import java.util.List;
 
+import java.util.prefs.Preferences;
+
 /**
  * The LoginController class manages the functionality of the login screen.
  * It handles user authentication, navigation to the homepage, and displaying error alerts.
  */
-import java.util.prefs.Preferences;
 public class LoginController {
     @FXML
     private TextField usernameField;
@@ -27,6 +28,9 @@ public class LoginController {
     @FXML
     private Hyperlink registerLink;
     private SqliteAccountDAO accountDAO;
+
+    private static final String SESSION_USERNAME_KEY = "loggedInUsername";
+
 
     /**
      * Initializes the controller. Sets up event handlers for login, register, and enter key press.
@@ -48,10 +52,10 @@ public class LoginController {
         onLoginButtonClick();
     }
 
+
     /**
      * Handles login button click events.
      */
-    private static final String SESSION_USERNAME_KEY = "loggedInUsername";
     @FXML
     protected void onLoginButtonClick() {
         String username = usernameField.getText();
