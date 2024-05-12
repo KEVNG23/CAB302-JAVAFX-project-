@@ -7,6 +7,9 @@ import javafx.scene.control.*;
 
 import java.util.prefs.Preferences;
 
+/**
+ * The ProfileController class handles user profile-related functionality in a JavaFX application.
+ */
 public class ProfileController {
     @FXML
     public TextField usernameField;
@@ -22,24 +25,36 @@ public class ProfileController {
 
     private static final String SESSION_USERNAME_KEY = "loggedInUsername";
 
-    // getter method for the SESSION_USERNAME_KEY constant
-    // use this to allow password and email change only for the user that is logged in
+    /**
+     * Gets the SESSION_USERNAME_KEY constant.
+     *
+     * @return the SESSION_USERNAME_KEY constant
+     */
     public static String getSessionUsernameKey() {
         return SESSION_USERNAME_KEY;
     }
 
-    // constructor initializes the SqliteAccountDAO
+    /**
+     * Constructs a new ProfileController and initializes the SqliteAccountDAO.
+     */
     public ProfileController() {
         this.accountDAO = new SqliteAccountDAO();
     }
 
-    // initialization method
+    /**
+     * Initializes the controller by retrieving the current user and updating the UI fields.
+     */
     @FXML
     public void initialize() {
         currentUser = retrieveCurrentUser();
         updateUIFields();
     }
-    // retrieves the currently logged-in user
+
+    /**
+     * Retrieves the currently logged-in user.
+     *
+     * @return the currently logged-in user, or null if no user is logged in
+     */
     private Account retrieveCurrentUser() {
         String loggedInUsername = getLoggedInUsername();
         if (loggedInUsername != null) {
@@ -48,12 +63,18 @@ public class ProfileController {
         return null;
     }
 
-    // retrieves the logged-in username
+    /**
+     * Retrieves the logged-in username from the session.
+     *
+     * @return the logged-in username, or null if no user is logged in
+     */
     private String getLoggedInUsername() {
         return Preferences.userRoot().get(SESSION_USERNAME_KEY, null);
     }
 
-    // updates the ui fields with the current user's information
+    /**
+     * Updates the UI fields with the current user's information.
+     */
     private void updateUIFields() {
         if (currentUser != null) {
             usernameField.setText(currentUser.getUsername());
@@ -65,21 +86,32 @@ public class ProfileController {
         }
     }
 
-    // event handler for re-affirming password change
+    /**
+     * Event handler for re-affirming password change.
+     * Displays the new password in the message area.
+     */
     @FXML
     protected void onChangePassword() {
         String newPassword = passwordField.getText();
         messageArea.setText("New Password: " + newPassword);
     }
 
-    // event handler for re-affirming email change
+    /**
+     * Event handler for re-affirming email change.
+     * Displays the new email in the message area.
+     */
     @FXML
     protected void onChangeEmail() {
         String newEmail = emailField.getText();
         messageArea.setText("New Email: " + newEmail);
     }
 
-    // event handler for saving the changes
+    /**
+     * Event handler for saving the changes made to the user's profile.
+     * Retrieves the current user, updates the user's password and email,
+     * and saves the changes to the database.
+     * Displays a success message in the message area.
+     */
     @FXML
     public void onSaveChanges() {
         // retrieve the currently logged-in user's information from the session
