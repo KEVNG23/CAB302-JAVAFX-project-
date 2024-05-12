@@ -27,7 +27,9 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 
-
+/**
+ * Controller class for the calendar view.
+ */
 public class CalendarController implements Initializable {
 
     ZonedDateTime dateFocus;
@@ -48,6 +50,13 @@ public class CalendarController implements Initializable {
         this.calendarDAO = new SqliteCalendarDAO();
     }
 
+
+    /**
+     * Initializes the calendar with the current date and draws the calendar view.
+     *
+     * @param url            The location used to resolve relative paths for the root object.
+     * @param resourceBundle The resources specific to this controller.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dateFocus = ZonedDateTime.now();
@@ -55,6 +64,12 @@ public class CalendarController implements Initializable {
         drawCalendar();
     }
 
+
+    /**
+     * Handles the action of navigating back one month in the calendar view.
+     *
+     * @param event The action event triggering the method call.
+     */
     @FXML
     void backOneMonth(ActionEvent event) {
         dateFocus = dateFocus.minusMonths(1);
@@ -62,6 +77,12 @@ public class CalendarController implements Initializable {
         drawCalendar();
     }
 
+
+    /**
+     * Handles the action of navigating forward one month in the calendar view.
+     *
+     * @param event The action event triggering the method call.
+     */
     @FXML
     void forwardOneMonth(ActionEvent event) {
         dateFocus = dateFocus.plusMonths(1);
@@ -71,6 +92,13 @@ public class CalendarController implements Initializable {
 
     private List<CalendarActivity> activities = new ArrayList<>();
 
+
+    /**
+     * Opens a new activity dialog for adding a new activity to the calendar.
+     *
+     * @param event The action event triggering the method call.
+     * @throws IOException If an error occurs while loading the dialog view.
+     */
     @FXML
     void addNewActivity(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo1/activity-dialog.fxml"));
@@ -89,6 +117,12 @@ public class CalendarController implements Initializable {
         stage.showAndWait();
     }
 
+
+    /**
+     * Shows a table view of calendar activities.
+     *
+     * @param event The action event triggering the method call.
+     */
     @FXML
     void showActivityTable(ActionEvent event) {
         try {
@@ -111,12 +145,24 @@ public class CalendarController implements Initializable {
         }
     }
 
+
+    /**
+     * Adds a new activity to the calendar and redraws the calendar view.
+     *
+     * @param calendarActivity The CalendarActivity to be added.
+     */
     public void addActivity(CalendarActivity calendarActivity) {
         calendarDAO.addActivity(calendarActivity); // Store the activity in the database
         activities.add(calendarActivity);
         drawCalendar(); // Redraw the calendar after adding the activity
     }
 
+
+    /**
+     * Deletes an activity from the calendar and updates the calendar view.
+     *
+     * @param calendarActivity The CalendarActivity to be deleted.
+     */
     public void deleteActivity(CalendarActivity calendarActivity) {
         // Implement logic to remove activity from database and local list
         // This method will be called from the ButtonTableCellFactory
@@ -132,6 +178,10 @@ public class CalendarController implements Initializable {
         return stackPane;
     }
 
+    /**
+     * Draws the calendar view based on the currently focused date.
+     * Retrieves activities for each day and displays them on the calendar.
+     */
     public void drawCalendar() {
         // Clear the existing calendar before drawing the new one
         calendar.getChildren().clear();
@@ -215,6 +265,13 @@ public class CalendarController implements Initializable {
         }
     }
 
+
+    /**
+     * Retrieves activities scheduled on a specific date.
+     *
+     * @param date The date for which activities are to be retrieved.
+     * @return A list of CalendarActivity objects scheduled for the given date.
+     */
     public List<CalendarActivity> getActivitiesOnDate(LocalDate date) {
         List<CalendarActivity> activitiesOnDate = new ArrayList<>();
         for (CalendarActivity calendarActivity : activities) {
