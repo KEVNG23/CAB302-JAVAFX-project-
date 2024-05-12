@@ -10,13 +10,13 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="532.0" prefWidth="873.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.Timer.StopwatchController">
+<AnchorPane maxHeight="495" maxWidth="415" minHeight="495" minWidth="415" prefHeight="495.0" prefWidth="415.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.Timer.StopwatchController">
    <children>
       <BorderPane prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <right>
-            <Pane prefHeight="479.0" prefWidth="883.0" style="-fx-background-color: #282828;" BorderPane.alignment="CENTER">
+            <Pane prefHeight="440.0" prefWidth="415.0" style="-fx-background-color: #282828;" BorderPane.alignment="CENTER">
                <children>
-                  <TextField fx:id="stopwatchLabel" alignment="CENTER" editable="false" layoutX="274.0" layoutY="71.0" prefHeight="100.0" prefWidth="336.0" style="-fx-background-color: #282828; -fx-text-fill: #ffffff;" text="00:00.00">
+                  <TextField fx:id="stopwatchLabel" alignment="CENTER" editable="false" layoutX="40.0" layoutY="29.0" prefHeight="100.0" prefWidth="336.0" style="-fx-background-color: #282828; -fx-text-fill: #ffffff;" text="00:00.00">
                      <font>
                         <Font name="System Bold" size="70.0" />
                      </font>
@@ -24,27 +24,30 @@
                         <Insets bottom="-10.0" left="-10.0" right="-10.0" top="-10.0" />
                      </padding>
                   </TextField>
-                  <Button fx:id="btnStart" layoutX="291.0" layoutY="179.0" onAction="#onStopStartClick" prefHeight="45.0" prefWidth="94.0" style="-fx-text-fill: #ffffff; -fx-background-color: #1a1a1a;" text="START">
+                  <Button fx:id="btnStart" layoutX="57.0" layoutY="137.0" onAction="#onStopStartClick" prefHeight="45.0" prefWidth="94.0" style="-fx-text-fill: #ffffff; -fx-background-color: #1a1a1a;" text="START">
                      <font>
                         <Font name="System Bold" size="21.0" />
                      </font>
                   </Button>
-                  <Button layoutX="395.0" layoutY="179.0" onAction="#onFlagClick" prefHeight="45.0" prefWidth="94.0" style="-fx-text-fill: #ffffff; -fx-background-color: #1a1a1a;" text="FLAG">
+                  <Button layoutX="161.0" layoutY="137.0" onAction="#onFlagClick" prefHeight="45.0" prefWidth="94.0" style="-fx-text-fill: #ffffff; -fx-background-color: #1a1a1a;" text="FLAG">
                      <font>
                         <Font name="System Bold" size="21.0" />
                      </font>
                   </Button>
-                  <Button layoutX="498.0" layoutY="179.0" onAction="#onResetClick" prefHeight="45.0" prefWidth="94.0" style="-fx-text-fill: #ffffff; -fx-background-color: #1a1a1a;" text="RESET">
+                  <Button layoutX="264.0" layoutY="137.0" onAction="#onResetClick" prefHeight="45.0" prefWidth="94.0" style="-fx-text-fill: #ffffff; -fx-background-color: #1a1a1a;" text="RESET">
                      <font>
                         <Font name="System Bold" size="21.0" />
                      </font>
                   </Button>
-                  <ListView fx:id="flagList" layoutX="293.0" layoutY="282.0" prefHeight="169.0" prefWidth="296.0" style="-fx-background-color: #1e1e1e;" />
+                  <ListView fx:id="flagList" layoutX="59.0" layoutY="240.0" prefHeight="169.0" prefWidth="296.0" style="-fx-background-color: #1e1e1e;" />
                </children></Pane>
          </right>
          <top>
-            <HBox prefHeight="53.0" prefWidth="873.0" style="-fx-background-color: #1E1E1E;" BorderPane.alignment="CENTER" />
+            <HBox prefHeight="53.0" prefWidth="414.0" style="-fx-background-color: #1E1E1E;" BorderPane.alignment="CENTER" />
          </top>
+         <left>
+            <Pane prefHeight="442.0" prefWidth="0.0" BorderPane.alignment="CENTER" />
+         </left>
       </BorderPane>
    </children>
 </AnchorPane>

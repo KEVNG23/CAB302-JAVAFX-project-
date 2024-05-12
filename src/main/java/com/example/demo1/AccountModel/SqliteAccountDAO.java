@@ -9,13 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * The SqliteAccountDAO class implements the IAccountDAO interface for managing user accounts stored in a SQLite database.
+ * It provides methods to add, update, delete, retrieve an account by username, and retrieve all accounts.
  */
 public class SqliteAccountDAO implements IAccountDAO {
     private Connection connection;
 
     /**
-     *
+     * Constructs a SqliteAccountDAO object and initializes the database connection.
      */
     public SqliteAccountDAO() {
         System.out.println("Initializing SqliteAccountDAO and creating table.");
@@ -26,6 +27,9 @@ public class SqliteAccountDAO implements IAccountDAO {
 
     }
 
+    /**
+     * Inserts sample data into the accounts table for testing purposes.
+     */
     private void insertSampleData(){
         try {
             //clear before inserting
@@ -58,10 +62,8 @@ public class SqliteAccountDAO implements IAccountDAO {
         }
     }
 
-
-
     /**
-     *
+     * Creates the accounts table if it does not exist in the database.
      */
     private void createTable() {
         try {
