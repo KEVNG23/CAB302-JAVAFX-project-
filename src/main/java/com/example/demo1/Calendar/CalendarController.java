@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -14,6 +15,8 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 
 import java.io.IOException;
 import java.net.URL;
@@ -86,10 +89,39 @@ public class CalendarController implements Initializable {
         stage.showAndWait();
     }
 
+    @FXML
+    void showActivityTable(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo1/CalendarActivityTable.fxml"));
+            Parent root = loader.load();
+
+            CalendarActivityTable tablecontroller = loader.getController();
+
+            List<CalendarActivity> activities = calendarDAO.getAllActivity();
+
+            tablecontroller.setActivities(activities);
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(new Scene(root));
+            stage.setTitle("Activity Table");
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void addActivity(CalendarActivity calendarActivity) {
         calendarDAO.addActivity(calendarActivity); // Store the activity in the database
         activities.add(calendarActivity);
         drawCalendar(); // Redraw the calendar after adding the activity
+    }
+
+    public void deleteActivity(CalendarActivity calendarActivity) {
+        // Implement logic to remove activity from database and local list
+        // This method will be called from the ButtonTableCellFactory
+        calendarDAO.deleteActivity(calendarActivity);
+        activities.remove(calendarActivity);
     }
 
 
@@ -192,6 +224,4 @@ public class CalendarController implements Initializable {
         }
         return activitiesOnDate;
     }
-
-
 }

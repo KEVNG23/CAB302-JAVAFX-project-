@@ -43,7 +43,7 @@ public class SqliteCalendarDAO implements ICalendarDAO {
         try{
             PreparedStatement statement = connection.prepareStatement("INSERT INTO activity (title, date, priority) VALUES (?, ?, ?)");
             statement.setString(1, calendarActivity.getTitle());
-            statement.setDate(2, Date.valueOf(calendarActivity.getDate()));
+            statement.setDate(2, java.sql.Date.valueOf(calendarActivity.getDate()));
             statement.setString(3, calendarActivity.getPriority());
             statement.executeUpdate();
             ResultSet generateKeys = statement.getGeneratedKeys();
@@ -90,15 +90,17 @@ public class SqliteCalendarDAO implements ICalendarDAO {
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
-                String title = resultSet.getString ("title");
-                LocalDate date = resultSet.getDate("date").toLocalDate();
+                String title = resultSet.getString("title");
+                long millis = resultSet.getLong("date"); // Assuming date is stored as milliseconds
+                LocalDate date = LocalDate.ofEpochDay(millis / (24 * 60 * 60 * 1000)); // Convert milliseconds to LocalDate
                 String priority = resultSet.getString("priority");
                 CalendarActivity calendarActivity = new CalendarActivity(id, title, date, priority);
                 calendarActivities.add(calendarActivity);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return calendarActivities;
     }
+
 }
