@@ -8,30 +8,62 @@ import javafx.stage.Stage;
 
 import java.time.LocalDate;
 
+/**
+ * Controller class for the activity dialog view.
+ */
 public class ActivityDialogController {
 
+    /**
+     * JavaFX TextField for entering client name.
+     */
     @FXML
     private TextField clientNameField;
 
+    /**
+     * JavaFX DatePicker for selecting activity date.
+     */
     @FXML
     private DatePicker datePicker;
 
+    /**
+     * JavaFX RadioButton for setting activity as important.
+     */
     @FXML
     private RadioButton importantRadioButton;
 
+    /**
+     * JavaFX RadioButton for setting activity as average priority.
+     */
     @FXML
     private RadioButton averageRadioButton;
 
+    /**
+     * JavaFX RadioButton for setting activity as not important.
+     */
     @FXML
     private RadioButton notImportantRadioButton;
 
-
+    /**
+     * Reference to the parent CalendarController.
+     */
     private CalendarController calendarController;
 
+
+    /**
+     * Sets the calendar controller associated with this dialog controller.
+     *
+     * @param calendarController The parent CalendarController instance.
+     */
     public void setCalendarController(CalendarController calendarController) {
         this.calendarController = calendarController;
     }
 
+
+    /**
+     * Handles the action of saving a new activity.
+     * Retrieves input values, validates them, creates a new CalendarActivity,
+     * and adds it to the CalendarController.
+     */
     @FXML
     void saveActivity() {
         String title = clientNameField.getText();
