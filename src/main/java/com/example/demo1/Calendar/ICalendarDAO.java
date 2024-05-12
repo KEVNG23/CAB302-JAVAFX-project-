@@ -4,11 +4,11 @@ import java.util.List;
 
 
 public interface ICalendarDAO {
-    public void addActivity(CalendarActivity activity);
+    public void addActivity(CalendarActivity calendarActivity);
 
-    public void updateActivity(CalendarActivity activity);
+    public void updateActivity(CalendarActivity calendarActivity);
 
-    public void deleteActivity(CalendarActivity activity);
+    public void deleteActivity(CalendarActivity calendarActivity);
 
     public List<CalendarActivity> getAllActivity();
 }

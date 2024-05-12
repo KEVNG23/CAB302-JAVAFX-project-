@@ -4,56 +4,75 @@ import javafx.scene.Scene;
 
 import java.time.LocalDate;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
+import java.time.LocalDate;
+
 public class CalendarActivity {
-    private Integer id;
-    private String title;
-    private LocalDate date;
-    private String priority;
-    private Scene scene;
+    private IntegerProperty id;
+    private StringProperty title;
+    private ObjectProperty<LocalDate> date;
+    private StringProperty priority;
 
     public CalendarActivity(Integer id, String title, LocalDate date, String priority) {
-        this.id = id;
-        this.title = title;
-        this.date = (date);
-        this.priority = priority;
+        this.id = new SimpleIntegerProperty(id != null ? id : 0);
+        this.title = new SimpleStringProperty(title != null ? title : "");
+        this.date = new SimpleObjectProperty<>(date);
+        this.priority = new SimpleStringProperty(priority != null ? priority : "");
     }
 
-
-    public Integer getId() { return id;}
-
-    public void setId(Integer id){
-        this.id = id;
+    public IntegerProperty idProperty() {
+        return id;
     }
 
-    public String getTitle() {
+    public StringProperty titleProperty() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public LocalDate getDate() {
+    public ObjectProperty<LocalDate> dateProperty() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public String getPriority() {
+    public StringProperty priorityProperty() {
         return priority;
     }
 
+    // Getters and setters for non-property fields
+    public Integer getId() {
+        return id != null ? id.get() : null;
+    }
+
+    public void setId(Integer id) {
+        this.id.set(id);
+    }
+
+    public String getTitle() {
+        return title != null ? title.get() : null;
+    }
+
+    public void setTitle(String title) {
+        this.title.set(title);
+    }
+
+    public LocalDate getDate() {
+        return date != null ? date.get() : null;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date.set(date);
+    }
+
+    public String getPriority() {
+        return priority != null ? priority.get() : null;
+    }
+
     public void setPriority(String priority) {
-        this.priority = priority;
-    }
-
-    public void setScene(Scene scene) {
-        this.scene = scene;
-    }
-
-    public Scene getScene() {
-        return scene;
+        this.priority.set(priority);
     }
 }
+
