@@ -20,10 +20,10 @@ public class CalendarActivity {
     private StringProperty priority;
 
     public CalendarActivity(Integer id, String title, LocalDate date, String priority) {
-        this.id = new SimpleIntegerProperty(id);
-        this.title = new SimpleStringProperty(title);
+        this.id = new SimpleIntegerProperty(id != null ? id : 0);
+        this.title = new SimpleStringProperty(title != null ? title : "");
         this.date = new SimpleObjectProperty<>(date);
-        this.priority = new SimpleStringProperty(priority);
+        this.priority = new SimpleStringProperty(priority != null ? priority : "");
     }
 
     public IntegerProperty idProperty() {
@@ -44,7 +44,7 @@ public class CalendarActivity {
 
     // Getters and setters for non-property fields
     public Integer getId() {
-        return id.get();
+        return id != null ? id.get() : null;
     }
 
     public void setId(Integer id) {
@@ -52,7 +52,7 @@ public class CalendarActivity {
     }
 
     public String getTitle() {
-        return title.get();
+        return title != null ? title.get() : null;
     }
 
     public void setTitle(String title) {
@@ -60,7 +60,7 @@ public class CalendarActivity {
     }
 
     public LocalDate getDate() {
-        return date.get();
+        return date != null ? date.get() : null;
     }
 
     public void setDate(LocalDate date) {
@@ -68,7 +68,7 @@ public class CalendarActivity {
     }
 
     public String getPriority() {
-        return priority.get();
+        return priority != null ? priority.get() : null;
     }
 
     public void setPriority(String priority) {

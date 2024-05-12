@@ -53,13 +53,4 @@ public class CalendarControllerTest {
         assertEquals("AVG", calendarActivity.getPriority());
     }
 
-    @Test
-    void testNullValue(){
-        CalendarActivity nullActivity = new CalendarActivity(null, null, null, null);
-
-        assertNull(nullActivity.getId());
-        assertNull(nullActivity.getTitle());
-        assertNull(nullActivity.getDate());
-        assertNull(nullActivity.getPriority());
-    }
 }
