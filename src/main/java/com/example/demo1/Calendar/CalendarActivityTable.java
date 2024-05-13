@@ -62,12 +62,18 @@ public class CalendarActivityTable implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Set cell value factories for each column
-     //   idColumn.setCellValueFactory(((CalendarActivity)calendarDAO.getAllActivity().toArray()[0]).getId());
-        idColumn.setCellValueFactory(new PropertyValueFactory<CalendarActivity,Integer>("id"));
-        titleColumn.setCellValueFactory(new PropertyValueFactory<CalendarActivity,String>("title"));
-      //  priorityColumn.setCellValueFactory(cellData -> cellData.getValue().priorityProperty());
-        priorityColumn.setCellValueFactory(new PropertyValueFactory<CalendarActivity,String>("priority"));
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
+        dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+        priorityColumn.setCellValueFactory(new PropertyValueFactory<>("priority"));
+
+        // Retrieve activities from the database
+        List<CalendarActivity> activities = calendarDAO.getAllActivity();
+
+        // Set the activities into the TableView
+        setActivities(activities);
     }
+
 
     /**
      * Sets the list of calendar activities to be displayed in the table.
@@ -77,6 +83,7 @@ public class CalendarActivityTable implements Initializable {
     public void setActivities(List<CalendarActivity> activities) {
         activityTable.getItems().setAll(activities);
     }
+
 
     /**
      * Handles the action of removing a selected activity from the table.
