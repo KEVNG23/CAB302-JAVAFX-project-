@@ -26,5 +26,7 @@ module com.example.demo1 {
 
     exports com.example.demo1.Timer;
     opens com.example.demo1.Timer to javafx.fxml;
+    exports com.example.demo1.Profile;
+    opens com.example.demo1.Profile to javafx.fxml;
 
 }

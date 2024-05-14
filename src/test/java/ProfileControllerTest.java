@@ -1,10 +1,12 @@
 import com.example.demo1.AccountModel.Account;
+import com.example.demo1.AccountModel.Session;
 import com.example.demo1.AccountModel.SqliteAccountDAO;
-import com.example.demo1.ProfileController;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.MockedStatic;
+import org.mockito.Mockito;
 
-import java.util.prefs.Preferences;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
@@ -12,40 +14,60 @@ import static org.mockito.Mockito.*;
 public class ProfileControllerTest {
 
     private SqliteAccountDAO accountDAO;
-    private Preferences preferences;
+    private Session session;  // Use Session instead of Preferences
+
+
+    private MockedStatic<Session> mockedSession;
+
 
     @BeforeEach
     public void setup() {
-        // Create a mock SqliteAccountDAO
-        accountDAO = mock(SqliteAccountDAO.class);
+        mockedSession = Mockito.mockStatic(Session.class);
+        session = mock(Session.class);  // Mock the Session object
+        accountDAO = mock(SqliteAccountDAO.class);  // Ensure this is correctly initialized
 
-        // Create a mock Preferences object to store the logged-in username
-        preferences = mock(Preferences.class);
-        when(preferences.get(ProfileController.getSessionUsernameKey(), null)).thenReturn("testUser");
+
+        // Set up a test account for the session
+        Account loggedInAccount = new Account(1, "testUser", "password", "test@example.com");
+        when(session.getLoggedInAccount()).thenReturn(loggedInAccount);
+
+        // Mock Session.getInstance() to return your mocked session
+        mockedSession.when(Session::getInstance).thenReturn(session);
+
     }
+
+
 
     @Test
     public void testSaveChanges() {
-        // Create a test account
-        Account testAccount = new Account(1, "testUser", "password", "test@example.com");
 
-        // Mock behavior of accountDAO
+        // Setup mocks for account retrieval and update methods
+        Account testAccount = new Account(1, "testUser", "password", "test@example.com");
         when(accountDAO.getAccount("testUser")).thenReturn(testAccount);
 
         // Simulate changing the password and email
         String newPassword = "newPassword";
         String newEmail = "newEmail@example.com";
-
-        // Update the account with the new password and email
         testAccount.setPassword(newPassword);
         testAccount.setEmail(newEmail);
 
-        // Call the updateAccount method
+        // Invoke the updateAccount method
         accountDAO.updateAccount(testAccount);
 
-        // Verify that the account details are updated
-        verify(accountDAO, times(1)).updateAccount(testAccount);
+        // Verify that updateAccount was called correctly
+        verify(accountDAO).updateAccount(testAccount);
+
+        // Assert changes to ensure they're set as expected
+
+
         assertEquals(newPassword, testAccount.getPassword());
         assertEquals(newEmail, testAccount.getEmail());
+    }
+
+
+
+    @AfterEach
+    public void tearDown() {
+        mockedSession.close();  // Close the static mock
     }
 }

@@ -19,12 +19,12 @@
    <children>
       <VBox alignment="CENTER" prefHeight="400.0" prefWidth="100.0" spacing="10.0">
          <children>
-            <Button id="timerButton" mnemonicParsing="false" onAction="#handleTimerButtonClick" text="Timer">
+            <Button fx:id="timerButton"  mnemonicParsing="false" onAction="#handleTimerButtonClick" text="Timer">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
             </Button>
-            <Button id="calendarButton" mnemonicParsing="false" onAction="#handleCalendarButtonClick" text="Calendar">
+            <Button fx:id="calendarButton" mnemonicParsing="false" onAction="#handleCalendarButtonClick" text="Calendar">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
@@ -37,8 +37,8 @@
          </children></VBox>
       <VBox alignment="CENTER" layoutX="500.0" prefHeight="400.0" prefWidth="100.0" spacing="10.0">
          <children>
-            <Button id="profileButton" mnemonicParsing="false" onAction="#handleProfileButtonClick" text="Profile" />
-            <Button fx:id="onLogout" onAction="#onLogoutButtonClick" text="Logout" />
+            <Button fx:id="profileButton" mnemonicParsing="false" onAction="#handleProfileButtonClick" text="Profile" />
+            <Button fx:id="logoutButton" onAction="#handleLogoutButtonClick" text="Logout" />
          </children></VBox>
       <VBox layoutX="100.0" prefHeight="400.0" prefWidth="394.0" spacing="10.0">
          <children>
