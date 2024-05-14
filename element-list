@@ -5,4 +5,5 @@ com.example.demo1.AccountModel
 com.example.demo1.Calendar
 com.example.demo1.HomePageController
 com.example.demo1.Models
+com.example.demo1.Profile
 com.example.demo1.Timer
