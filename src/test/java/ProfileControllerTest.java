@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
@@ -15,7 +16,9 @@ public class ProfileControllerTest {
     private SqliteAccountDAO accountDAO;
     private Session session;  // Use Session instead of Preferences
 
+
     private MockedStatic<Session> mockedSession;
+
 
     @BeforeEach
     public void setup() {
@@ -23,18 +26,21 @@ public class ProfileControllerTest {
         session = mock(Session.class);  // Mock the Session object
         accountDAO = mock(SqliteAccountDAO.class);  // Ensure this is correctly initialized
 
+
         // Set up a test account for the session
         Account loggedInAccount = new Account(1, "testUser", "password", "test@example.com");
         when(session.getLoggedInAccount()).thenReturn(loggedInAccount);
 
         // Mock Session.getInstance() to return your mocked session
         mockedSession.when(Session::getInstance).thenReturn(session);
+
     }
 
 
 
     @Test
     public void testSaveChanges() {
+
         // Setup mocks for account retrieval and update methods
         Account testAccount = new Account(1, "testUser", "password", "test@example.com");
         when(accountDAO.getAccount("testUser")).thenReturn(testAccount);
@@ -52,6 +58,8 @@ public class ProfileControllerTest {
         verify(accountDAO).updateAccount(testAccount);
 
         // Assert changes to ensure they're set as expected
+
+
         assertEquals(newPassword, testAccount.getPassword());
         assertEquals(newEmail, testAccount.getEmail());
     }
