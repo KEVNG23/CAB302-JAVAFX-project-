@@ -1,5 +1,6 @@
 package com.example.demo1.AccountController;
 
+import com.example.demo1.AccountModel.Session;
 import com.example.demo1.AccountModel.SqliteAccountDAO;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -29,7 +30,7 @@ public class LoginController {
     private Hyperlink registerLink;
     private SqliteAccountDAO accountDAO;
 
-    private static final String SESSION_USERNAME_KEY = "loggedInUsername";
+    // private static final String SESSION_USERNAME_KEY = "loggedInUsername";
 
 
     /**
@@ -62,6 +63,7 @@ public class LoginController {
         String password = passwordField.getText();
         boolean isLoggedIn = authenticateUser(username, password);
         SqliteAccountDAO accountDAO = new SqliteAccountDAO();
+        Account account = accountDAO.getAccount(username); // Retrieve the account from the database
 
         if (!existedAccount(username, accountDAO.getAllAccounts())) {
             showErrorAlert("Can't find this account");
@@ -69,7 +71,10 @@ public class LoginController {
         }
         if (isLoggedIn) {
             // Store the logged-in user's username in the session
-            Preferences.userRoot().put(SESSION_USERNAME_KEY, username);
+            // Preferences.userRoot().put(SESSION_USERNAME_KEY, username);
+            Session.getInstance().setLoggedInAccount(account);
+            System.out.println("session:" + username);
+
 
             navigationToHomepage();
         } else {
