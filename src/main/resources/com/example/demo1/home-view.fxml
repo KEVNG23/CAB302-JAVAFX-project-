@@ -9,6 +9,8 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -19,15 +21,19 @@
    <children>
       <VBox alignment="CENTER" prefHeight="400.0" prefWidth="100.0" spacing="10.0">
          <children>
-            <Button fx:id="timerButton"  mnemonicParsing="false" onAction="#handleTimerButtonClick" text="Timer">
+            <Button fx:id="timerButton" mnemonicParsing="false" onAction="#handleTimerButtonClick" text="Timer">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
             </Button>
-            <Button fx:id="calendarButton" mnemonicParsing="false" onAction="#handleCalendarButtonClick" text="Calendar">
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
+            <Button fx:id="calendarButton" onAction="#handleCalendarButtonClick">
+               <graphic>
+                  <ImageView fitHeight="24" fitWidth="24" preserveRatio="true">
+                     <image>
+                        <Image url="@images/calendar.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Button>
             <Button mnemonicParsing="false" text="Settings">
                <VBox.margin>

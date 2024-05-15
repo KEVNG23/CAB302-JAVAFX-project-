@@ -13,6 +13,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.io.IOException;
 import java.net.URL;
@@ -58,6 +61,9 @@ public class HomeController {
     @FXML
     private Button profileButton;
 
+//    @FXML
+//    private ImageView calendarIcon;
+
     private SqliteTaskDAO task;
 
 
@@ -67,6 +73,10 @@ public class HomeController {
         this.task = new SqliteTaskDAO();
         timerButton.setOnAction(event -> handleTimerButtonClick());
         calendarButton.setOnAction(event -> handleCalendarButtonClick());
+        ImageView calendarIcon = new ImageView(new Image(getClass().getResourceAsStream("calendar.png")));
+        calendarIcon.setFitHeight(24); // Adjust height as needed
+        calendarIcon.setFitWidth(24); // Adjust width as needed
+        calendarButton.setGraphic(calendarIcon);
         profileButton.setOnAction(event -> handleProfileButtonClick());
         logoutButton.setOnAction(event -> handleLogoutButtonClick());
 
