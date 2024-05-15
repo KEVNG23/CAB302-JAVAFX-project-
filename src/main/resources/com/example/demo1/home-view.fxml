@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.HomePageController.HomeController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="root" stylesheets="@profile.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.HomePageController.HomeController">
    <children>
       <VBox alignment="CENTER" prefHeight="400.0" prefWidth="100.0" spacing="10.0">
          <children>
