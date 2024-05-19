@@ -1,12 +1,12 @@
 package com.example.demo1.Calendar;
 
+import com.example.demo1.AccountModel.Session;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -15,8 +15,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 
 import java.io.IOException;
 import java.net.URL;
@@ -44,11 +42,13 @@ public class CalendarController implements Initializable {
     @FXML
     private FlowPane calendar;
 
-    private ICalendarDAO calendarDAO;
+    private SqliteCalendarDAO calendarDAO;
+    private List<CalendarActivity> activities;
 
-    public CalendarController(){
+
+    /**public CalendarController(){
         this.calendarDAO = new SqliteCalendarDAO();
-    }
+    }*/
 
 
     /**
@@ -59,11 +59,21 @@ public class CalendarController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        this.calendarDAO = new SqliteCalendarDAO();
         dateFocus = ZonedDateTime.now();
         today = ZonedDateTime.now();
+        this.activities = new ArrayList<>();
+        loadUserActivities();
         drawCalendar();
     }
 
+    private void loadUserActivities() {
+        Session session = Session.getInstance();
+        if (session.getLoggedInAccount() != null) {
+            int accountId = session.getLoggedInAccount().getId();
+            this.activities = calendarDAO.getAllActivity(accountId);
+        }
+    }
 
     /**
      * Handles the action of navigating back one month in the calendar view.
@@ -89,8 +99,6 @@ public class CalendarController implements Initializable {
         calendar.getChildren().clear();
         drawCalendar();
     }
-
-    private List<CalendarActivity> activities = new ArrayList<>();
 
 
     /**
@@ -125,15 +133,14 @@ public class CalendarController implements Initializable {
      */
     @FXML
     void showActivityTable(ActionEvent event) {
+        Session session = Session.getInstance();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo1/CalendarActivityTable.fxml"));
             Parent root = loader.load();
 
-            CalendarActivityTable tablecontroller = loader.getController();
-
-            List<CalendarActivity> activities = calendarDAO.getAllActivity();
-
-            tablecontroller.setActivities(activities);
+            CalendarActivityTable tableController = loader.getController();
+            tableController.setCalendarDAO(new SqliteCalendarDAO()); // Pass the calendarDAO object
+            tableController.setCalendarController(this);
 
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
@@ -146,43 +153,33 @@ public class CalendarController implements Initializable {
     }
 
 
+
+    public void refreshCalendar() {
+        loadUserActivities(); // Reload activities from the database
+        drawCalendar(); // Redraw the calendar
+    }
+
+
     /**
      * Adds a new activity to the calendar and redraws the calendar view.
      *
      * @param calendarActivity The CalendarActivity to be added.
      */
-    public void addActivity(CalendarActivity calendarActivity) {
-        calendarDAO.addActivity(calendarActivity); // Store the activity in the database
-        activities.add(calendarActivity);
-        drawCalendar(); // Redraw the calendar after adding the activity
+    public void addActivity(CalendarActivity calendarActivity, Session session) {
+        if (session.getLoggedInAccount() != null) {
+            calendarDAO.addActivity(calendarActivity, session);
+            activities.add(calendarActivity);
+            drawCalendar();
+        }
     }
 
-
-    /**
-     * Deletes an activity from the calendar and updates the calendar view.
-     *
-     * @param calendarActivity The CalendarActivity to be deleted.
-     */
-    public void deleteActivity(CalendarActivity calendarActivity) {
-        // Implement logic to remove activity from database and local list
-        // This method will be called from the ButtonTableCellFactory
-        calendarDAO.deleteActivity(calendarActivity);
-        activities.remove(calendarActivity);
-    }
-
-
-    private StackPane createDayPane(Rectangle rectangle, Text dateText) {
-        StackPane stackPane = new StackPane();
-        stackPane.getChildren().addAll(rectangle, dateText);
-        // You can add more nodes like additional text, icons, etc. to the stackPane if needed
-        return stackPane;
-    }
 
     /**
      * Draws the calendar view based on the currently focused date.
      * Retrieves activities for each day and displays them on the calendar.
      */
     public void drawCalendar() {
+        Session session = Session.getInstance();
         // Clear the existing calendar before drawing the new one
         calendar.getChildren().clear();
 
@@ -190,7 +187,8 @@ public class CalendarController implements Initializable {
         month.setText(String.valueOf(dateFocus.getMonth()));
 
         // Fetch activities from the database
-        activities = calendarDAO.getAllActivity();
+        int accountId = session.getLoggedInAccount().getId();
+        activities = calendarDAO.getAllActivity(accountId);
 
         double calendarWidth = calendar.getPrefWidth();
         double calendarHeight = calendar.getPrefHeight();

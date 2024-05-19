@@ -1,6 +1,6 @@
 package com.example.demo1.Calendar;
 
-import javafx.event.ActionEvent;
+import com.example.demo1.AccountModel.Session;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -50,8 +50,12 @@ public class CalendarActivityTable implements Initializable {
     /**
      * DAO object for interacting with the calendar activities database.
      */
-    private final ICalendarDAO calendarDAO = new SqliteCalendarDAO();
+    private SqliteCalendarDAO calendarDAO;
 
+    /**
+     * Reference to the parent CalendarController.
+     */
+    private CalendarController calendarController;
 
     /**
      * Initializes the TableView and sets cell value factories for each column.
@@ -66,14 +70,19 @@ public class CalendarActivityTable implements Initializable {
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
         priorityColumn.setCellValueFactory(new PropertyValueFactory<>("priority"));
-
-        // Retrieve activities from the database
-        List<CalendarActivity> activities = calendarDAO.getAllActivity();
-
-        // Set the activities into the TableView
-        setActivities(activities);
     }
 
+    /**
+     * Loads the activities for the logged-in account and sets them in the table.
+     */
+    private void loadActivities() {
+        Session session = Session.getInstance();
+        if (session.getLoggedInAccount() != null) {
+            int accountId = session.getLoggedInAccount().getId();
+            List<CalendarActivity> activities = calendarDAO.getAllActivity(accountId);
+            setActivities(activities);
+        }
+    }
 
     /**
      * Sets the list of calendar activities to be displayed in the table.
@@ -84,6 +93,25 @@ public class CalendarActivityTable implements Initializable {
         activityTable.getItems().setAll(activities);
     }
 
+    /**
+     * Setter method for setting the calendarDAO object.
+     *
+     * @param newCalendarDAO The calendarDAO object to be set.
+     */
+    public void setCalendarDAO(SqliteCalendarDAO newCalendarDAO) {
+        this.calendarDAO = newCalendarDAO;
+        // Load the activities for the logged-in account
+        loadActivities();
+    }
+
+    /**
+     * Sets the calendar controller associated with this table controller.
+     *
+     * @param calendarController The parent CalendarController instance.
+     */
+    public void setCalendarController(CalendarController calendarController) {
+        this.calendarController = calendarController;
+    }
 
     /**
      * Handles the action of removing a selected activity from the table.
@@ -95,6 +123,9 @@ public class CalendarActivityTable implements Initializable {
         if (selectedActivity != null) {
             calendarDAO.deleteActivity(selectedActivity);
             activityTable.getItems().remove(selectedActivity);
+            if (calendarController != null) {
+                calendarController.refreshCalendar();   // Refresh Calendar in the main calendar view
+            }
         }
     }
 }
