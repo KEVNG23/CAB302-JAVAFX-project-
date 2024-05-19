@@ -16,22 +16,17 @@
                   <PropertyValueFactory property="id" />
                </cellValueFactory>
             </TableColumn>
-            <TableColumn fx:id="titleColumn" prefWidth="178.0" text="Title">
+            <TableColumn fx:id="titleColumn" prefWidth="265.0" text="Title">
                <cellValueFactory>
                   <PropertyValueFactory property="title" />
                </cellValueFactory>
             </TableColumn>
-            <TableColumn fx:id="dateColumn" prefWidth="166.0" text="Date">
+            <TableColumn fx:id="dateColumn" prefWidth="175.0" text="Date">
                <cellValueFactory>
                   <PropertyValueFactory property="date" />
                </cellValueFactory>
             </TableColumn>
-            <TableColumn fx:id="priorityColumn" prefWidth="109.0" text="Priority">
-               <cellValueFactory>
-                  <PropertyValueFactory property="priority" />
-               </cellValueFactory>
-            </TableColumn>
-            <TableColumn fx:id="account_idColumm" prefWidth="96.0" text="Account_id">
+            <TableColumn fx:id="priorityColumn" prefWidth="108.0" text="Priority">
                <cellValueFactory>
                   <PropertyValueFactory property="priority" />
                </cellValueFactory>

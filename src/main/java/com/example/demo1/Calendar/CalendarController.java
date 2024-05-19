@@ -142,12 +142,6 @@ public class CalendarController implements Initializable {
             tableController.setCalendarDAO(new SqliteCalendarDAO()); // Pass the calendarDAO object
             tableController.setCalendarController(this);
 
-
-            int accountId = session.getLoggedInAccount().getId();
-            List<CalendarActivity> activities = calendarDAO.getAllActivity(accountId);
-
-            tableController.setActivities(activities);
-
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(new Scene(root));
