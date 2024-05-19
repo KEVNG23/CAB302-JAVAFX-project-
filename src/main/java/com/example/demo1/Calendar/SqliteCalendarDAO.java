@@ -1,5 +1,6 @@
 package com.example.demo1.Calendar;
 
+import com.example.demo1.AccountModel.Session;
 import com.example.demo1.Models.SqliteConnection;
 
 import java.sql.*;
@@ -11,11 +12,13 @@ import java.util.List;
 public class SqliteCalendarDAO implements ICalendarDAO {
 
     private Connection connection;
+    private Session session;
 
     public SqliteCalendarDAO() {
         System.out.println("Initializing SqliteAccountDAO and creating table.");
         connection = SqliteConnection.getInstance();
         createTable();
+        alterTable();
         // Used for testing
         //insertSampleData();
 
@@ -27,24 +30,43 @@ public class SqliteCalendarDAO implements ICalendarDAO {
             String query = "CREATE TABLE IF NOT EXISTS Activity ("
                     + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
                     + "title VARCHAR NOT NULL,"
-                    + "date VARCHAR NOT NULL,"
-                    + "priority VARCHAR NOT NULL"
+                    + "date TEXT NOT NULL,"
+                    + "priority VARCHAR NOT NULL,"
+                    + "account_id INTEGER NOT NULL," // Column for the associated account ID
+                    + "FOREIGN KEY (account_id) REFERENCES accounts(id)"// Foreign key constraint
                     + ")";
             statement.execute(query);
         } catch (Exception e) {
             e.printStackTrace();
 
         }
-
     }
 
     @Override
-    public void addActivity(CalendarActivity calendarActivity) {
+    public void alterTable() {
+        try {
+            DatabaseMetaData metaData = connection.getMetaData();
+            ResultSet resultSet = metaData.getColumns(null, null, "Activity", "account_id");
+            if (!resultSet.next()) {
+                // account_id column does not exist, add it
+                Statement statement = connection.createStatement();
+                String query = "ALTER TABLE Activity ADD COLUMN account_id INTEGER";
+                statement.execute(query);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void addActivity(CalendarActivity calendarActivity, Session session) {
+        int accountId = session.getLoggedInAccount().getId(); //Session class
         try{
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO activity (title, date, priority) VALUES (?, ?, ?)");
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO Activity (title, date, priority, account_id) VALUES (?, ?, ?, ?)");
             statement.setString(1, calendarActivity.getTitle());
             statement.setDate(2, java.sql.Date.valueOf(calendarActivity.getDate()));
             statement.setString(3, calendarActivity.getPriority());
+            statement.setInt(4, accountId);
             statement.executeUpdate();
             ResultSet generateKeys = statement.getGeneratedKeys();
             if(generateKeys.next()){
@@ -59,7 +81,7 @@ public class SqliteCalendarDAO implements ICalendarDAO {
     @Override
     public void updateActivity(CalendarActivity calendarActivity) {
         try {
-            PreparedStatement statement = connection.prepareStatement("UPDATE activity SET title = ?, date = ?, priority =? WHERE id = ?");
+            PreparedStatement statement = connection.prepareStatement("UPDATE Activity SET title = ?, date = ?, priority =? WHERE id = ?");
             statement.setString(1, calendarActivity.getTitle());
             statement.setDate(2, Date.valueOf(calendarActivity.getDate()));
             statement.setString(3, calendarActivity.getPriority());
@@ -72,7 +94,7 @@ public class SqliteCalendarDAO implements ICalendarDAO {
     @Override
     public void deleteActivity(CalendarActivity calendarActivity) {
         try {
-            String query = "DELETE FROM activity WHERE id = ?";
+            String query = "DELETE FROM Activity WHERE id = ?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, calendarActivity.getId());
             statement.executeUpdate();
@@ -82,12 +104,13 @@ public class SqliteCalendarDAO implements ICalendarDAO {
     }
 
     @Override
-    public List<CalendarActivity> getAllActivity() {
+    public List<CalendarActivity> getAllActivity(int accountId) {
         List<CalendarActivity> calendarActivities = new ArrayList<>();
         try {
-            Statement statement = connection.createStatement();
-            String query = "SELECT * FROM activity";
-            ResultSet resultSet = statement.executeQuery(query);
+            String query = "SELECT * FROM Activity WHERE account_id = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, accountId);
+            ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String title = resultSet.getString("title");

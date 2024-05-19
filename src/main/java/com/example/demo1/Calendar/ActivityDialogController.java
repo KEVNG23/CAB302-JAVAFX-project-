@@ -1,5 +1,6 @@
 package com.example.demo1.Calendar;
 
+import com.example.demo1.AccountModel.Session;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
@@ -88,9 +89,10 @@ public class ActivityDialogController {
         // Create the activity
         CalendarActivity newCalendarActivity = new CalendarActivity(null, title, date, priority);
 
+        Session session = Session.getInstance();
         // Pass the new activity to the calendarController
         if (calendarController != null) {
-            calendarController.addActivity(newCalendarActivity);
+            calendarController.addActivity(newCalendarActivity, session);
             calendarController.drawCalendar(); // Redraw the calendar
         }
 
