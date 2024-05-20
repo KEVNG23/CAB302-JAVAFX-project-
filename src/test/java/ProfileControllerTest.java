@@ -42,12 +42,12 @@ public class ProfileControllerTest {
     public void testSaveChanges() {
 
         // Setup mocks for account retrieval and update methods
-        Account testAccount = new Account(1, "testUser", "password", "test@example.com");
+        Account testAccount = new Account(1, "testUser", "password", "test@gmail.com");
         when(accountDAO.getAccount("testUser")).thenReturn(testAccount);
 
         // Simulate changing the password and email
         String newPassword = "newPassword";
-        String newEmail = "newEmail@example.com";
+        String newEmail = "newEmail@gmail.com";
         testAccount.setPassword(newPassword);
         testAccount.setEmail(newEmail);
 
