@@ -8,7 +8,7 @@ public class AccountTest {
     private Account account;
     @BeforeEach
     void setUp(){
-        account = new Account( 1,"Testing", "testing@email.com", "testing123");
+        account = new Account( 1,"Testing", "testing@gmail.com", "testing123");
 
     }
 
@@ -37,13 +37,13 @@ public class AccountTest {
 
     @Test
     void testGetEmail (){
-        assertEquals("testing@email.com", account.getEmail());
+        assertEquals("testing@gmail.com", account.getEmail());
     }
 
     @Test
     void testSetEmail(){
-        account.setEmail("testing2@email.com");
-        assertEquals("testing2@email.com", account.getEmail());
+        account.setEmail("testing2@gmail.com");
+        assertEquals("testing2@gmail.com", account.getEmail());
     }
 
     @Test

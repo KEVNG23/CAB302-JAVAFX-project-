@@ -27,7 +27,7 @@ public class Account {
     public Account(Integer id, String username, String email, String password) {
         this.id = id;
         this.username = username;
-        setEmail(email); // Use setter to validate email
+        this.email = email;
         this.password = password;
     }
 
@@ -77,11 +77,10 @@ public class Account {
      * @throws IllegalArgumentException if the email is not a valid address from the allowed domains.
      */
     public void setEmail(String email) {
-        if (isValidEmail(email)) {
-            this.email = email;
-        } else {
+        if (email != null && !isValidEmail(email)) {
             throw new IllegalArgumentException("Invalid email address. The email must be from a valid domain: " + VALID_DOMAINS);
         }
+        this.email = email;
     }
 
     /**
