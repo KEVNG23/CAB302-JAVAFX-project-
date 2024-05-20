@@ -5,15 +5,13 @@ import com.example.demo1.AccountModel.SqliteAccountDAO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import com.example.demo1.Main;
 
 import java.io.IOException;
 import java.util.List;
+
 
 /**
  * The RegisterController class manages the functionality of the user registration screen.
@@ -27,10 +25,10 @@ public class RegisterController {
     private TextField emailField;
 
     @FXML
-    private TextField passwordField;
+    private PasswordField passwordField;
 
     @FXML
-    private TextField confirmPasswordField;
+    private PasswordField confirmPasswordField;
 
     @FXML
     private Hyperlink loginLink;
@@ -96,6 +94,10 @@ public class RegisterController {
             showErrorAlert("Password do not match");
             return;
 
+        }
+        if (!Account.isValidEmail(email)) {
+            showErrorAlert("Invalid email address. The email must be from a valid domain.");
+            return;
         }
         SqliteAccountDAO accountDAO = new SqliteAccountDAO();
         if (existedAccount(username, accountDAO.getAllAccounts())){
