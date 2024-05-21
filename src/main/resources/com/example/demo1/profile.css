@@ -1,5 +1,5 @@
 .root {
-    -fx-font-family: 'Arial';
+    -fx-font-family: 'Yu Gothic UI';
     -fx-base: #FFFFFF;
     -fx-background: #F0F0F0;
 }
@@ -37,4 +37,34 @@
      -fx-font-size: 20px;
      -fx-font-weight: bold;
      -fx-text-fill: #333333;
+}
+
+.username-text {
+    -fx-font-size: 40px;
+    -fx-font-weight: bold;
+}
+
+.home-page-menu-button {
+    -fx-background-color: #5CACEE, linear-gradient(#6CADDF 50%, #5CACEE 100%), linear-gradient(#AFC6E9 0%, #6CADDF 100%);
+    -fx-background-insets: 0,1,2;
+    -fx-background-radius: 3,2,1;
+    -fx-padding: 3 30 3 30;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+    -fx-font-size: 18px;
+}
+
+
+.home-page-menu-button:hover {
+    -fx-font-size: 20px;
+}
+
+.home-page-combo-box {
+    -fx-font-size: 12px;
+    -fx-background-color: #5CACEE, linear-gradient(#6CADDF 50%, #5CACEE 100%), linear-gradient(#AFC6E9 0%, #6CADDF 100%);
+    -fx-text-fill: #ffffff;
+}
+
+.home-page-label {
+    -fx-font-size: 14px;
 }

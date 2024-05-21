@@ -73,10 +73,6 @@ public class HomeController {
         this.task = new SqliteTaskDAO();
         timerButton.setOnAction(event -> handleTimerButtonClick());
         calendarButton.setOnAction(event -> handleCalendarButtonClick());
-        ImageView calendarIcon = new ImageView(new Image(getClass().getResourceAsStream("calendar.png")));
-        calendarIcon.setFitHeight(24); // Adjust height as needed
-        calendarIcon.setFitWidth(24); // Adjust width as needed
-        calendarButton.setGraphic(calendarIcon);
         profileButton.setOnAction(event -> handleProfileButtonClick());
         logoutButton.setOnAction(event -> handleLogoutButtonClick());
 

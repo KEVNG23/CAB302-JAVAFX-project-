@@ -18,10 +18,10 @@ import java.sql.Connection;
 public class Main extends Application {
 
     /** The width of the application window. */
-    public static final int WIDTH = 600;
+    public static final int WIDTH = 744;
 
     /** The height of the application window. */
-    public static final int HEIGHT = 420;
+    public static final int HEIGHT = 642;
     private CalendarActivity primaryStage;
 
     /**
