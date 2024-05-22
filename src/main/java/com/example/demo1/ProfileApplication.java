@@ -21,26 +21,19 @@ public class ProfileApplication extends Application {
      */
     @Override
     public void start(Stage stage) throws IOException {
-        // load the fxml file
         FXMLLoader fxmlLoader = new FXMLLoader(ProfileApplication.class.getResource("profile-view.fxml"));
 
-        // create a new scene with the fxml file and set the size
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
 
-        // set the title
         stage.setTitle("Profile Settings");
 
-        // set the minimum width and height
         stage.setMinWidth(800);
         stage.setMinHeight(500);
 
-        // set the scene
         stage.setScene(scene);
 
-        // show the stage
         stage.show();
     }
-
     /**
      * The main method is the entry point of the JavaFX application.
      * It launches the application by calling the launch method of the Application class.

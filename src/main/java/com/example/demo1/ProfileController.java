@@ -114,7 +114,6 @@ public class ProfileController {
      */
     @FXML
     public void onSaveChanges() {
-        // retrieve the currently logged-in user's information from the session
         currentUser = retrieveCurrentUser();
 
         if (currentUser == null) {
@@ -125,11 +124,9 @@ public class ProfileController {
         String newPassword = passwordField.getText();
         String newEmail = emailField.getText();
 
-        // update the current user's password and email
         currentUser.setPassword(newPassword);
         currentUser.setEmail(newEmail);
 
-        // update the user's information in the database
         accountDAO.updateAccount(currentUser);
         messageArea.setText("Changes saved successfully.");
     }
