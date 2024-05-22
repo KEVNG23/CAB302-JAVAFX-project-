@@ -1,5 +1,7 @@
 package com.example.demo1.HomePageController;
 
+import com.example.demo1.AccountModel.Session;
+import com.example.demo1.AccountModel.SqliteAccountDAO;
 import com.example.demo1.Main;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
@@ -8,24 +10,32 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Optional;
+import java.util.ResourceBundle;
 
 public class HomeController {
     @FXML
-    private TableView<TaskDetails> taskTable;
+    private TableView<Task> taskTable;
 
     @FXML
-    private TableColumn<TaskDetails, String> taskColumn;
+    private TableColumn<Task, String> taskColumn;
 
     @FXML
-    private TableColumn<TaskDetails, String> timeColumn;
+    private TableColumn<Task, String> timeColumn;
 
     @FXML
-    private TableColumn<TaskDetails, String> urgencyColumn;
+    private TableColumn<Task, String> urgencyColumn;
 
     @FXML
     private TextField taskField;
@@ -40,148 +50,217 @@ public class HomeController {
     private Text usernameText; // Add Text element for displaying username
 
     @FXML
-    private Button onLogout;
+    private Button logoutButton;
 
-    private DatabaseHandler databaseHandler;
+    @FXML
+    private Button timerButton;
+
+    @FXML
+    private Button calendarButton;
+
+    @FXML
+    private Button profileButton;
+
+//    @FXML
+//    private ImageView calendarIcon;
+
+    private SqliteTaskDAO task;
+
 
     // Existing initialize() method
+
+    public void initialize(){
+        this.task = new SqliteTaskDAO();
+        timerButton.setOnAction(event -> handleTimerButtonClick());
+        calendarButton.setOnAction(event -> handleCalendarButtonClick());
+        profileButton.setOnAction(event -> handleProfileButtonClick());
+        logoutButton.setOnAction(event -> handleLogoutButtonClick());
+
+        taskColumn.setCellValueFactory(new PropertyValueFactory<>("task"));
+        timeColumn.setCellValueFactory(new PropertyValueFactory<>("timeFrame"));
+        urgencyColumn.setCellValueFactory(new PropertyValueFactory<>("urgency"));
+
+        // Set up username display
+        Session session = Session.getInstance();
+        if (session.getLoggedInAccount() != null) {
+            String username = session.getLoggedInAccount().getUsername(); // Get the username from the session
+            usernameText.setText("Hello, " + username + "!"); // Set the text with greeting
+
+            int accountId = session.getLoggedInAccount().getId();
+            List<Task> userTasks = task.getAllTasks(accountId);
+            taskTable.getItems().setAll(userTasks);
+        } else {
+            usernameText.setText("Hello!");
+        }
+
+    }
+
+    public void refreshTasks() {
+        int accountId = Session.getInstance().getLoggedInAccount().getId();
+        List<Task> userTasks = task.getAllTasks(accountId);
+        taskTable.getItems().setAll(userTasks);
+    }
+
+
     @FXML
-    private void initialize() {
-        // Initialize DatabaseHandler
-        databaseHandler = new DatabaseHandler();
+    protected void handleTimerButtonClick() {
         try {
-            // Establish database connection
-            databaseHandler.connect();
-
-            // Retrieve username for the logged-in user from the database
-            String username = databaseHandler.getUsernameForLoggedInUser();
-            if (username != null) {
-                usernameText.setText("Hello, " + username + "!");
-            } else {
-                // Handle case when username is not found
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            // Handle connection error or database error
-        }
-
-        // Existing initialization code
-        taskColumn.setCellValueFactory(cellData -> {
-            String value = cellData.getValue().getTask();
-            return new SimpleStringProperty(value);
-        });
-
-        timeColumn.setCellValueFactory(cellData -> {
-            String value = cellData.getValue().getTimeFrame();
-            return new SimpleStringProperty(value);
-        });
-
-        urgencyColumn.setCellValueFactory(cellData -> {
-            String value = cellData.getValue().getUrgency();
-            return new SimpleStringProperty(value);
-        });
-    }
-    private static class TaskDetails {
-        private final String task;
-        private final String timeFrame;
-        private final String urgency;
-
-        public TaskDetails(String task, String timeFrame, String urgency) {
-            this.task = task;
-            this.timeFrame = timeFrame;
-            this.urgency = urgency;
-        }
-
-        // Getters for task details
-        public String getTask() {
-            return task;
-        }
-
-        public String getTimeFrame() {
-            return timeFrame;
-        }
-
-        public String getUrgency() {
-            return urgency;
-        }
-    }
-    @FXML
-    private void handleAddTask() {
-        String newTask = taskField.getText().trim();
-        String timeFrame = timeFrameComboBox.getValue(); // Get selected time frame
-        String urgency = urgencyComboBox.getValue(); // Get selected urgency
-
-        if (!newTask.isEmpty() && timeFrame != null && urgency != null) {
-            TaskDetails taskDetails = new TaskDetails(newTask, timeFrame, urgency);
-            taskTable.getItems().add(taskDetails);
-            taskField.clear();
-            timeFrameComboBox.setValue(null); // Reset ComboBox value after adding task
-            urgencyComboBox.setValue(null); // Reset ComboBox value after adding task
-        }
-    }
-
-    @FXML
-    private void handleRemoveTask() {
-        int selectedIndex = taskTable.getSelectionModel().getSelectedIndex();
-        if (selectedIndex >= 0) {
-            taskTable.getItems().remove(selectedIndex);
-        }
-    }
-    @FXML
-    private void handleCalendarButtonClick(ActionEvent event) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo1/calendar-view.fxml"));
-            Parent root = fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setTitle("Calendar");
-            stage.setScene(new Scene(root));
-            stage.show();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.err.println("Error loading calendar-view.fxml: " + e.getMessage());
-        }
-    }
-
-    @FXML
-    private void handleTimerButtonClick(ActionEvent event) {
-        try {
+            // Load the timer view from the FXML file
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo1/timer-view.fxml"));
-            Parent root = fxmlLoader.load();
+            Parent root = fxmlLoader.load();  // Load the root element from the FXML
+
+            // Create a new stage for the timer window
             Stage stage = new Stage();
-            stage.setTitle("Timer");
-            stage.setScene(new Scene(root));
+            stage.setTitle("Timer");  // Set a title for the window
+            stage.setScene(new Scene(root));  // Set the scene to the new stage
+
+            // Show the new stage, making the timer window visible
             stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.err.println("Error loading timer-view.fxml: " + e.getMessage());
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to load timer view", e);
         }
     }
 
+
     @FXML
-    private void handleProfileButtonClick(ActionEvent event) {
+    protected void handleCalendarButtonClick() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo1/hello-view1.fxml"));
-            Parent root = fxmlLoader.load();
+            // Load the timer view from the FXML file
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo1/calendar-view.fxml"));
+            Parent root = fxmlLoader.load();  // Load the root element from the FXML
+
+            // Create a new stage for the timer window
             Stage stage = new Stage();
-            stage.setTitle("Profile");
-            stage.setScene(new Scene(root));
+            stage.setTitle("Calendar");  // Set a title for the window
+            stage.setScene(new Scene(root));  // Set the scene to the new stage
+
+            // Show the new stage, making the timer window visible
             stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.err.println("Error loading hello-view1.fxml: " + e.getMessage());
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to load calendar view", e);
         }
     }
 
     @FXML
-    protected void onLogoutButtonClick() {
-        Stage stage = (Stage) onLogout.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("login-view.fxml"));
+    protected void handleProfileButtonClick() {
+        try {
+            // Load the timer view from the FXML file
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo1/profile-view.fxml"));
+            Parent root = fxmlLoader.load();  // Load the root element from the FXML
+
+            // Create a new stage for the timer window
+            Stage stage = new Stage();
+            stage.setTitle("Profile");  // Set a title for the window
+            stage.setScene(new Scene(root));  // Set the scene to the new stage
+
+            // Show the new stage, making the timer window visible
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to load profile view", e);
+        }
+    }
+
+    @FXML
+    protected void handleLogoutButtonClick() {
+        Stage stage = (Stage) logoutButton.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo1/login-view.fxml"));
         Scene scene = null;
-        try {
-            scene = new Scene(fxmlLoader.load(), Main.WIDTH, Main.HEIGHT); //change to Homepage size
+        try{
+            scene = new Scene(fxmlLoader.load(), Main.WIDTH, Main.HEIGHT);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         stage.setScene(scene);
-    }}
+    }
+
+    @FXML
+    protected void handleAddTask() {
+        String taskDescription = taskField.getText();
+        String timeFrame = timeFrameComboBox.getValue();
+        String urgency = urgencyComboBox.getValue();
+
+        if (!validateTaskInputs(taskDescription, timeFrame, urgency)) {
+            showAlert("Validation Error", "All fields must be filled!", Alert.AlertType.ERROR);
+            return;
+        }
+
+        Task newTask = new Task(0, taskDescription, timeFrame, urgency); // Ensure the Task constructor matches this signature
+        if (addNewTask(newTask)) {
+            showAlert("Success", "Task added successfully.", Alert.AlertType.INFORMATION);
+            clearAndResetUI();
+            refreshTasks();
+        } else {
+            showAlert("Error", "Failed to add task.", Alert.AlertType.ERROR);
+        }
+    }
+
+    private boolean validateTaskInputs(String description, String time, String urgency) {
+        return !(description.isEmpty() || time == null || urgency == null);
+    }
+
+    private boolean addNewTask(Task task) {
+        try {
+            this.task.addTask(task, Session.getInstance());
+            taskTable.getItems().add(task);
+            return true;
+        } catch (Exception e) {
+            System.err.println("Error adding task: " + e.getMessage());
+            return false;
+        }
+    }
+
+    private void clearAndResetUI() {
+        taskField.clear();
+        timeFrameComboBox.setValue(null);
+        urgencyComboBox.setValue(null);
+    }
+
+    @FXML
+    protected void handleRemoveTask() {
+        Task selectedTask = taskTable.getSelectionModel().getSelectedItem();
+        if (selectedTask == null) {
+            showAlert("No Selection", "No Task Selected. Please select a task in the table.", Alert.AlertType.ERROR);
+            return;
+        }
+
+        if (showConfirmation("Confirm Delete", "Are you sure you want to delete this task?")) {
+            if (removeTask(selectedTask)) {
+                showAlert("Success", "Task removed successfully.", Alert.AlertType.INFORMATION);
+                refreshTasks();
+            } else {
+                showAlert("Error", "Failed to remove task.", Alert.AlertType.ERROR);
+            }
+        }
+    }
+
+    private boolean removeTask(Task task) {
+        try {
+            this.task.removeTask(task, Session.getInstance());
+            taskTable.getItems().remove(task);
+            return true;
+        } catch (Exception e) {
+            System.err.println("Error removing task: " + e.getMessage());
+            return false;
+        }
+    }
+    private void showAlert(String title, String message, Alert.AlertType type) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    private boolean showConfirmation(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        return alert.showAndWait().filter(response -> response == ButtonType.OK).isPresent();
+    }
+
+
+
+
+}
+

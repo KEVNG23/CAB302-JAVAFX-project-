@@ -1,11 +1,10 @@
-package com.example.demo1;
+package com.example.demo1.Profile;
 
 import com.example.demo1.AccountModel.Account;
+import com.example.demo1.AccountModel.Session;
 import com.example.demo1.AccountModel.SqliteAccountDAO;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-
-import java.util.prefs.Preferences;
 
 /**
  * The ProfileController class handles user profile-related functionality in a JavaFX application.
@@ -23,17 +22,6 @@ public class ProfileController {
     private SqliteAccountDAO accountDAO;
     private Account currentUser;
 
-    private static final String SESSION_USERNAME_KEY = "loggedInUsername";
-
-    /**
-     * Gets the SESSION_USERNAME_KEY constant.
-     *
-     * @return the SESSION_USERNAME_KEY constant
-     */
-    public static String getSessionUsernameKey() {
-        return SESSION_USERNAME_KEY;
-    }
-
     /**
      * Constructs a new ProfileController and initializes the SqliteAccountDAO.
      */
@@ -42,34 +30,12 @@ public class ProfileController {
     }
 
     /**
-     * Initializes the controller by retrieving the current user and updating the UI fields.
+     * Initializes the controller by retrieving the current user from the session and updating the UI fields.
      */
     @FXML
     public void initialize() {
-        currentUser = retrieveCurrentUser();
+        currentUser = Session.getInstance().getLoggedInAccount();
         updateUIFields();
-    }
-
-    /**
-     * Retrieves the currently logged-in user.
-     *
-     * @return the currently logged-in user, or null if no user is logged in
-     */
-    private Account retrieveCurrentUser() {
-        String loggedInUsername = getLoggedInUsername();
-        if (loggedInUsername != null) {
-            return accountDAO.getAccount(loggedInUsername);
-        }
-        return null;
-    }
-
-    /**
-     * Retrieves the logged-in username from the session.
-     *
-     * @return the logged-in username, or null if no user is logged in
-     */
-    private String getLoggedInUsername() {
-        return Preferences.userRoot().get(SESSION_USERNAME_KEY, null);
     }
 
     /**
@@ -108,14 +74,10 @@ public class ProfileController {
 
     /**
      * Event handler for saving the changes made to the user's profile.
-     * Retrieves the current user, updates the user's password and email,
-     * and saves the changes to the database.
-     * Displays a success message in the message area.
+     * Checks if email or password field is blank before admitting changes to the database
      */
     @FXML
     public void onSaveChanges() {
-        currentUser = retrieveCurrentUser();
-
         if (currentUser == null) {
             messageArea.setText("Please log in.");
             return;
@@ -124,8 +86,13 @@ public class ProfileController {
         String newPassword = passwordField.getText();
         String newEmail = emailField.getText();
 
-        currentUser.setPassword(newPassword);
-        currentUser.setEmail(newEmail);
+        if (!newPassword.isBlank()) {
+            currentUser.setPassword(newPassword);
+        }
+
+        if (!newEmail.isBlank()) {
+            currentUser.setEmail(newEmail);
+        }
 
         accountDAO.updateAccount(currentUser);
         messageArea.setText("Changes saved successfully.");
