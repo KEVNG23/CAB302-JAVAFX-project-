@@ -46,11 +46,6 @@ public class CalendarController implements Initializable {
     private List<CalendarActivity> activities;
 
 
-    /**public CalendarController(){
-        this.calendarDAO = new SqliteCalendarDAO();
-    }*/
-
-
     /**
      * Initializes the calendar with the current date and draws the calendar view.
      *
@@ -67,6 +62,11 @@ public class CalendarController implements Initializable {
         drawCalendar();
     }
 
+    /**
+     * Loads activities associated with the currently logged-in user from the database.
+     * If no user is logged in, this method does nothing.
+     * Loaded activities are stored in the {@code activities} list for display on the calendar.
+     */
     private void loadUserActivities() {
         Session session = Session.getInstance();
         if (session.getLoggedInAccount() != null) {
@@ -152,13 +152,13 @@ public class CalendarController implements Initializable {
         }
     }
 
-
-
+    /**
+     * Refreshes the calendar view by reloading activities from the database and redrawing the calendar.
+     */
     public void refreshCalendar() {
         loadUserActivities(); // Reload activities from the database
         drawCalendar(); // Redraw the calendar
     }
-
 
     /**
      * Adds a new activity to the calendar and redraws the calendar view.
