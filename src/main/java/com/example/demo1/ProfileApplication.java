@@ -27,8 +27,8 @@ public class ProfileApplication extends Application {
 
         stage.setTitle("Profile Settings");
 
-        stage.setMinWidth(800);
-        stage.setMinHeight(500);
+        stage.setMinWidth(744);
+        stage.setMinHeight(642);
 
         stage.setScene(scene);
 

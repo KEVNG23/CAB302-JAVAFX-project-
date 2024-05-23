@@ -5,7 +5,7 @@ import com.example.demo1.AccountModel.Session;
 import com.example.demo1.AccountModel.SqliteAccountDAO;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-
+import com.example.demo1.HomePageController.HomeController;
 /**
  * The ProfileController class handles user profile-related functionality in a JavaFX application.
  */
@@ -21,6 +21,7 @@ public class ProfileController {
 
     private SqliteAccountDAO accountDAO;
     private Account currentUser;
+    private HomeController homeController;
 
     /**
      * Constructs a new ProfileController and initializes the SqliteAccountDAO.
@@ -97,4 +98,11 @@ public class ProfileController {
         accountDAO.updateAccount(currentUser);
         messageArea.setText("Changes saved successfully.");
     }
+    public void setHomeController(HomeController homeController) {
+        this.homeController = homeController;
+    }
+    @FXML
+    protected void handleTimerButtonClick() {}
+    @FXML
+    protected void handleCalendarButtonClick() {}
 }

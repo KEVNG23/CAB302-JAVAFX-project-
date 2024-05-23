@@ -103,7 +103,7 @@ public class HomeController {
 
 
     @FXML
-    protected void handleTimerButtonClick() {
+    public void handleTimerButtonClick() {
         try {
             // Load the timer view from the FXML file
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo1/timer-view.fxml"));
@@ -123,7 +123,7 @@ public class HomeController {
 
 
     @FXML
-    protected void handleCalendarButtonClick() {
+    public void handleCalendarButtonClick() {
         try {
             // Load the timer view from the FXML file
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo1/calendar-view.fxml"));
