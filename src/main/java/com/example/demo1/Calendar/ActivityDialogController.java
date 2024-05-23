@@ -73,11 +73,11 @@ public class ActivityDialogController {
 
         // Check which priority radio button is selected
         if (importantRadioButton.isSelected()) {
-            priority = "URG";
+            priority = "High";
         } else if (averageRadioButton.isSelected()) {
-            priority = "AVE";
+            priority = "Medium";
         } else if (notImportantRadioButton.isSelected()) {
-            priority = "Not URG";
+            priority = "Low";
         }
 
         // Validate inputs
