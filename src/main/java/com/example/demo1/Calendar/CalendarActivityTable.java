@@ -66,7 +66,6 @@ public class CalendarActivityTable implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Set cell value factories for each column
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
         priorityColumn.setCellValueFactory(new PropertyValueFactory<>("priority"));

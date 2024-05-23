@@ -14,6 +14,9 @@ public class SqliteCalendarDAO implements ICalendarDAO {
     private Connection connection;
     private Session session;
 
+    /**
+     * Constructs a new SqliteCalendarDAO and initializes the database.
+     */
     public SqliteCalendarDAO() {
         System.out.println("Initializing SqliteAccountDAO and creating table.");
         connection = SqliteConnection.getInstance();
@@ -24,6 +27,10 @@ public class SqliteCalendarDAO implements ICalendarDAO {
 
     }
 
+    /**
+     * Creates the "Activity" table in the database if it doesn't already exist.
+     * This table stores calendar activities.
+     */
     private void createTable() {
         try {
             Statement statement = connection.createStatement();
@@ -42,6 +49,10 @@ public class SqliteCalendarDAO implements ICalendarDAO {
         }
     }
 
+    /**
+     * Alters the "Activity" table to add the "account_id" column if it doesn't exist.
+     * This column is used to associate activities with user accounts.
+     */
     @Override
     public void alterTable() {
         try {
@@ -58,6 +69,12 @@ public class SqliteCalendarDAO implements ICalendarDAO {
         }
     }
 
+    /**
+     * Adds a new activity to the "Activity" table in the database.
+     *
+     * @param calendarActivity The activity to add.
+     * @param session          The session containing user information.
+     */
     @Override
     public void addActivity(CalendarActivity calendarActivity, Session session) {
         int accountId = session.getLoggedInAccount().getId(); //Session class
@@ -78,6 +95,11 @@ public class SqliteCalendarDAO implements ICalendarDAO {
         }
     }
 
+    /**
+     * Updates an existing activity in the "Activity" table.
+     *
+     * @param calendarActivity The activity to update.
+     */
     @Override
     public void updateActivity(CalendarActivity calendarActivity) {
         try {
@@ -91,6 +113,11 @@ public class SqliteCalendarDAO implements ICalendarDAO {
             e.printStackTrace();        }
     }
 
+    /**
+     * Deletes an activity from the "Activity" table.
+     *
+     * @param calendarActivity The activity to delete.
+     */
     @Override
     public void deleteActivity(CalendarActivity calendarActivity) {
         try {
@@ -103,6 +130,12 @@ public class SqliteCalendarDAO implements ICalendarDAO {
         }
     }
 
+    /**
+     * Retrieves all activities associated with a specific account from the database.
+     *
+     * @param accountId The ID of the account.
+     * @return A list of activities for the specified account.
+     */
     @Override
     public List<CalendarActivity> getAllActivity(int accountId) {
         List<CalendarActivity> calendarActivities = new ArrayList<>();
