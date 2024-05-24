@@ -127,7 +127,7 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <Button onAction="#handleRemoveTask" prefHeight="30.0" prefWidth="200.0" text="Complete/Remove Task">
+            <Button onAction="#handleRemoveTask" prefHeight="30.0" prefWidth="300.0" text="Complete/Remove Task">
                <font>
                   <Font name="Yu Gothic UI Semibold" size="12.0" />
                </font></Button>
