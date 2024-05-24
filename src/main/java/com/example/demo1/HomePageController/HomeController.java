@@ -1,12 +1,11 @@
 package com.example.demo1.HomePageController;
 
 import com.example.demo1.AccountModel.Session;
-import com.example.demo1.AccountModel.SqliteAccountDAO;
 import com.example.demo1.Main;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -14,15 +13,14 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+
+import javafx.scene.control.TextField;
 
 import java.io.IOException;
-import java.net.URL;
-import java.sql.SQLException;
+
+import java.io.IOException;
+
 import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
 
 public class HomeController {
     @FXML
@@ -49,20 +47,6 @@ public class HomeController {
     @FXML
     private Text usernameText; // Add Text element for displaying username
 
-    @FXML
-    private Button logoutButton;
-
-    @FXML
-    private Button timerButton;
-
-    @FXML
-    private Button calendarButton;
-
-    @FXML
-    private Button profileButton;
-
-//    @FXML
-//    private ImageView calendarIcon;
 
     private SqliteTaskDAO task;
 
@@ -71,10 +55,6 @@ public class HomeController {
 
     public void initialize(){
         this.task = new SqliteTaskDAO();
-        timerButton.setOnAction(event -> handleTimerButtonClick());
-        calendarButton.setOnAction(event -> handleCalendarButtonClick());
-        profileButton.setOnAction(event -> handleProfileButtonClick());
-        logoutButton.setOnAction(event -> handleLogoutButtonClick());
 
         taskColumn.setCellValueFactory(new PropertyValueFactory<>("task"));
         timeColumn.setCellValueFactory(new PropertyValueFactory<>("timeFrame"));
@@ -101,76 +81,41 @@ public class HomeController {
         taskTable.getItems().setAll(userTasks);
     }
 
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
 
     @FXML
-    public void handleTimerButtonClick() {
-        try {
-            // Load the timer view from the FXML file
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo1/timer-view.fxml"));
-            Parent root = fxmlLoader.load();  // Load the root element from the FXML
-
-            // Create a new stage for the timer window
-            Stage stage = new Stage();
-            stage.setTitle("Timer");  // Set a title for the window
-            stage.setScene(new Scene(root));  // Set the scene to the new stage
-
-            // Show the new stage, making the timer window visible
-            stage.show();
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to load timer view", e);
-        }
-    }
-
-
-    @FXML
-    public void handleCalendarButtonClick() {
-        try {
-            // Load the timer view from the FXML file
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo1/calendar-view.fxml"));
-            Parent root = fxmlLoader.load();  // Load the root element from the FXML
-
-            // Create a new stage for the timer window
-            Stage stage = new Stage();
-            stage.setTitle("Calendar");  // Set a title for the window
-            stage.setScene(new Scene(root));  // Set the scene to the new stage
-
-            // Show the new stage, making the timer window visible
-            stage.show();
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to load calendar view", e);
-        }
-    }
-
-    @FXML
-    protected void handleProfileButtonClick() {
-        try {
-            // Load the timer view from the FXML file
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo1/profile-view.fxml"));
-            Parent root = fxmlLoader.load();  // Load the root element from the FXML
-
-            // Create a new stage for the timer window
-            Stage stage = new Stage();
-            stage.setTitle("Profile");  // Set a title for the window
-            stage.setScene(new Scene(root));  // Set the scene to the new stage
-
-            // Show the new stage, making the timer window visible
-            stage.show();
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to load profile view", e);
-        }
-    }
-
-    @FXML
-    protected void handleLogoutButtonClick() {
-        Stage stage = (Stage) logoutButton.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo1/login-view.fxml"));
-        Scene scene = null;
-        try{
-            scene = new Scene(fxmlLoader.load(), Main.WIDTH, Main.HEIGHT);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public void handleTimerButtonClick(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/com/example/demo1/timer-view.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
         stage.setScene(scene);
+        stage.show();
+    }
+    @FXML
+    public void handleCalendarButtonClick(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/com/example/demo1/calendar-view.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    @FXML
+    public void handleProfileButtonClick(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/com/example/demo1/profile-view.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    @FXML
+    public void handleLogoutButtonClick(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/com/example/demo1/login-view.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML

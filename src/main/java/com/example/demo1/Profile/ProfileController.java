@@ -3,9 +3,18 @@ package com.example.demo1.Profile;
 import com.example.demo1.AccountModel.Account;
 import com.example.demo1.AccountModel.Session;
 import com.example.demo1.AccountModel.SqliteAccountDAO;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import com.example.demo1.HomePageController.HomeController;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+
 /**
  * The ProfileController class handles user profile-related functionality in a JavaFX application.
  */
@@ -98,11 +107,41 @@ public class ProfileController {
         accountDAO.updateAccount(currentUser);
         messageArea.setText("Changes saved successfully.");
     }
-    public void setHomeController(HomeController homeController) {
-        this.homeController = homeController;
+
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
+
+    @FXML
+    public void handleDashboardButtonClick(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/com/example/demo1/home-view.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
     @FXML
-    protected void handleTimerButtonClick() {}
+    public void handleCalendarButtonClick(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/com/example/demo1/calendar-view.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
     @FXML
-    protected void handleCalendarButtonClick() {}
+    public void handleTimerButtonClick(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/com/example/demo1/timer-view.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    @FXML
+    public void handleLogoutButtonClick(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/com/example/demo1/login-view.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 }

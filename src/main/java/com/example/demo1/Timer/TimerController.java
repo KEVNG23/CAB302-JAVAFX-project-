@@ -6,10 +6,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.scene.control.TextField;
 
 import java.io.IOException;
 
@@ -20,12 +18,55 @@ public class TimerController {
     private Scene scene;
     private Parent root;
 
-    public void switchToStopwatchPage(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/com/example/demo1/stopwatch-view.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+    @FXML
+    public void handleDashboardButtonClick(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/com/example/demo1/home-view.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+    @FXML
+    public void handleCalendarButtonClick(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/com/example/demo1/calendar-view.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    @FXML
+    public void handleProfileButtonClick(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/com/example/demo1/profile-view.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    @FXML
+    public void handleLogoutButtonClick(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/com/example/demo1/login-view.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    @FXML
+    public void switchToStopwatchPage() {
+        try {
+            // Load the timer view from the FXML file
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo1/stopwatch-view.fxml"));
+            Parent root = fxmlLoader.load();  // Load the root element from the FXML
+
+            // Create a new stage for the timer window
+            Stage stage = new Stage();
+            stage.setTitle("Timer");  // Set a title for the window
+            stage.setScene(new Scene(root));  // Set the scene to the new stage
+
+            // Show the new stage, making the timer window visible
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to load timer view", e);
+        }
     }
 
     @FXML

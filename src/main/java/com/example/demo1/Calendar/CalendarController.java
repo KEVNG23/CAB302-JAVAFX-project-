@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.FlowPane;
@@ -261,6 +262,43 @@ public class CalendarController implements Initializable {
                 calendar.getChildren().add(stackPane);
             }
         }
+    }
+
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
+
+    @FXML
+    public void handleDashboardButtonClick(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/com/example/demo1/home-view.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    @FXML
+    public void handleTimerButtonClick(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/com/example/demo1/timer-view.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    @FXML
+    public void handleProfileButtonClick(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/com/example/demo1/profile-view.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    @FXML
+    public void handleLogoutButtonClick(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/com/example/demo1/login-view.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
 
