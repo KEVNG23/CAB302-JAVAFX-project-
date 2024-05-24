@@ -18,10 +18,10 @@
         <DatePicker fx:id="datePicker" />
 
         <Label text="Priority:" />
-        <HBox>
-            <RadioButton fx:id="importantRadioButton" prefHeight="17.0" prefWidth="98.0" text="URG" />
-            <RadioButton fx:id="averageRadioButton" prefHeight="17.0" prefWidth="93.0" text="AVE" />
-            <RadioButton fx:id="notImportantRadioButton" text="Not URG" />
+        <HBox prefHeight="17.0" prefWidth="272.0">
+            <RadioButton fx:id="importantRadioButton" prefHeight="17.0" prefWidth="98.0" text="High" />
+            <RadioButton fx:id="averageRadioButton" prefHeight="17.0" prefWidth="101.0" text="Medium" />
+            <RadioButton fx:id="notImportantRadioButton" prefHeight="17.0" prefWidth="81.0" text="Low" />
         </HBox>
 
         <Button onAction="#saveActivity" text="Save" />
