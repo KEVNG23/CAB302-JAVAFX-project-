@@ -24,8 +24,6 @@
             <PasswordField fx:id="passwordField" layoutX="93.0" layoutY="86.0" promptText="Enter new password" styleClass="text-field" />
             <Label layoutX="14.0" layoutY="115.0" styleClass="label" text="Email:" />
             <TextField fx:id="emailField" layoutX="64.0" layoutY="114.0" promptText="Enter new email" styleClass="text-field" />
-            <Button layoutX="261.0" layoutY="85.0" onAction="#onChangePassword" styleClass="button" text="Change" />
-            <Button layoutX="238.0" layoutY="114.0" onAction="#onChangeEmail" styleClass="button" text="Change" />
             <Button layoutX="19.0" layoutY="147.0" onAction="#onSaveChanges" styleClass="button" text="Save Changes" />
             <TextArea fx:id="messageArea" editable="false" layoutX="37.0" layoutY="178.0" prefHeight="37.0" prefWidth="344.0" styleClass="text-area" wrapText="true" />
          </children>

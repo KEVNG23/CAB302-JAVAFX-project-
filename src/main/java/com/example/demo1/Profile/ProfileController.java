@@ -63,26 +63,6 @@ public class ProfileController {
     }
 
     /**
-     * Event handler for re-affirming password change.
-     * Displays the new password in the message area.
-     */
-    @FXML
-    protected void onChangePassword() {
-        String newPassword = passwordField.getText();
-        messageArea.setText("New Password: " + newPassword);
-    }
-
-    /**
-     * Event handler for re-affirming email change.
-     * Displays the new email in the message area.
-     */
-    @FXML
-    protected void onChangeEmail() {
-        String newEmail = emailField.getText();
-        messageArea.setText("New Email: " + newEmail);
-    }
-
-    /**
      * Event handler for saving the changes made to the user's profile.
      * Checks if email or password field is blank before admitting changes to the database
      */

@@ -75,9 +75,9 @@ public class CountdownViewController {
     private void showHourlyAlert() {
         Platform.runLater(() -> {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Hourly Update");
+            alert.setTitle("Timer Update");
             alert.setHeaderText(null);
-            alert.setContentText("The timer has been running for an hour! Maybe you should take a break.");
+            alert.setContentText("The timer has finished! Maybe you should take a break.");
 
             alert.showAndWait();
         });
