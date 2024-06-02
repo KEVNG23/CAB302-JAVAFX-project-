@@ -1,29 +1,27 @@
 package com.example.demo1.HomePageController;
 
+/**
+ * Import statements.
+ */
 import com.example.demo1.AccountModel.Session;
-import com.example.demo1.AccountModel.SqliteAccountDAO;
-import com.example.demo1.Main;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-
+import javafx.scene.control.TextField;
 import java.io.IOException;
-import java.net.URL;
-import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
 
+/**
+ * The HomeController class manages the functionality of the home page.
+ * It handles task management, navigation to other views, and user interaction with the UI elements.
+ */
 public class HomeController {
     @FXML
     private TableView<Task> taskTable;
@@ -47,44 +45,25 @@ public class HomeController {
     private ComboBox<String> urgencyComboBox;
 
     @FXML
-    private Text usernameText; // Add Text element for displaying username
-
-    @FXML
-    private Button logoutButton;
-
-    @FXML
-    private Button timerButton;
-
-    @FXML
-    private Button calendarButton;
-
-    @FXML
-    private Button profileButton;
-
-//    @FXML
-//    private ImageView calendarIcon;
+    private Text usernameText;
 
     private SqliteTaskDAO task;
 
-
-    // Existing initialize() method
-
+    /**
+     * Initializes the controller. Sets up the task table columns, displays the username,
+     * and loads tasks for the logged-in user.
+     */
     public void initialize(){
         this.task = new SqliteTaskDAO();
-        timerButton.setOnAction(event -> handleTimerButtonClick());
-        calendarButton.setOnAction(event -> handleCalendarButtonClick());
-        profileButton.setOnAction(event -> handleProfileButtonClick());
-        logoutButton.setOnAction(event -> handleLogoutButtonClick());
 
         taskColumn.setCellValueFactory(new PropertyValueFactory<>("task"));
         timeColumn.setCellValueFactory(new PropertyValueFactory<>("timeFrame"));
         urgencyColumn.setCellValueFactory(new PropertyValueFactory<>("urgency"));
 
-        // Set up username display
         Session session = Session.getInstance();
         if (session.getLoggedInAccount() != null) {
-            String username = session.getLoggedInAccount().getUsername(); // Get the username from the session
-            usernameText.setText("Hello, " + username + "!"); // Set the text with greeting
+            String username = session.getLoggedInAccount().getUsername();
+            usernameText.setText("Hello, " + username + "!");
 
             int accountId = session.getLoggedInAccount().getId();
             List<Task> userTasks = task.getAllTasks(accountId);
@@ -95,84 +74,78 @@ public class HomeController {
 
     }
 
+    /**
+     * Refreshes the tasks displayed in the table for the logged-in user.
+     */
     public void refreshTasks() {
         int accountId = Session.getInstance().getLoggedInAccount().getId();
         List<Task> userTasks = task.getAllTasks(accountId);
         taskTable.getItems().setAll(userTasks);
     }
 
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
 
+    /**
+     * Handles the event when the timer button is clicked. Navigates to the timer view.
+     * @param event The action event triggered by clicking the timer button.
+     * @throws IOException if the timer view FXML file cannot be loaded.
+     */
     @FXML
-    public void handleTimerButtonClick() {
-        try {
-            // Load the timer view from the FXML file
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo1/timer-view.fxml"));
-            Parent root = fxmlLoader.load();  // Load the root element from the FXML
-
-            // Create a new stage for the timer window
-            Stage stage = new Stage();
-            stage.setTitle("Timer");  // Set a title for the window
-            stage.setScene(new Scene(root));  // Set the scene to the new stage
-
-            // Show the new stage, making the timer window visible
-            stage.show();
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to load timer view", e);
-        }
-    }
-
-
-    @FXML
-    public void handleCalendarButtonClick() {
-        try {
-            // Load the timer view from the FXML file
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo1/calendar-view.fxml"));
-            Parent root = fxmlLoader.load();  // Load the root element from the FXML
-
-            // Create a new stage for the timer window
-            Stage stage = new Stage();
-            stage.setTitle("Calendar");  // Set a title for the window
-            stage.setScene(new Scene(root));  // Set the scene to the new stage
-
-            // Show the new stage, making the timer window visible
-            stage.show();
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to load calendar view", e);
-        }
-    }
-
-    @FXML
-    protected void handleProfileButtonClick() {
-        try {
-            // Load the timer view from the FXML file
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo1/profile-view.fxml"));
-            Parent root = fxmlLoader.load();  // Load the root element from the FXML
-
-            // Create a new stage for the timer window
-            Stage stage = new Stage();
-            stage.setTitle("Profile");  // Set a title for the window
-            stage.setScene(new Scene(root));  // Set the scene to the new stage
-
-            // Show the new stage, making the timer window visible
-            stage.show();
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to load profile view", e);
-        }
-    }
-
-    @FXML
-    protected void handleLogoutButtonClick() {
-        Stage stage = (Stage) logoutButton.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo1/login-view.fxml"));
-        Scene scene = null;
-        try{
-            scene = new Scene(fxmlLoader.load(), Main.WIDTH, Main.HEIGHT);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public void handleTimerButtonClick(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/com/example/demo1/timer-view.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
         stage.setScene(scene);
+        stage.show();
     }
 
+    /**
+     * Handles the event when the calendar button is clicked. Navigates to the calendar view.
+     * @param event The action event triggered by clicking the calendar button.
+     * @throws IOException if the calendar view FXML file cannot be loaded.
+     */
+    @FXML
+    public void handleCalendarButtonClick(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/com/example/demo1/calendar-view.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    /**
+     * Handles the event when the profile button is clicked. Navigates to the profile view.
+     * @param event The action event triggered by clicking the profile button.
+     * @throws IOException if the profile view FXML file cannot be loaded.
+     */
+    @FXML
+    public void handleProfileButtonClick(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/com/example/demo1/profile-view.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    /**
+     * Handles the event when the logout button is clicked. Navigates to the login view.
+     * @param event The action event triggered by clicking the logout button.
+     * @throws IOException if the login view FXML file cannot be loaded.
+     */
+    @FXML
+    public void handleLogoutButtonClick(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/com/example/demo1/login-view.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    /**
+     * Handles the event when the add task button is clicked. Adds a new task to the task list.
+     */
     @FXML
     protected void handleAddTask() {
         String taskDescription = taskField.getText();
@@ -194,10 +167,22 @@ public class HomeController {
         }
     }
 
+    /**
+     * Validates the inputs for adding a new task.
+     * @param description The description of the task.
+     * @param time The time frame for the task.
+     * @param urgency The urgency level of the task.
+     * @return True if all inputs are valid, otherwise false.
+     */
     private boolean validateTaskInputs(String description, String time, String urgency) {
         return !(description.isEmpty() || time == null || urgency == null);
     }
 
+    /**
+     * Adds a new task to the task list and updates the UI.
+     * @param task The task to add.
+     * @return True if the task was successfully added, otherwise false.
+     */
     private boolean addNewTask(Task task) {
         try {
             this.task.addTask(task, Session.getInstance());
@@ -209,12 +194,18 @@ public class HomeController {
         }
     }
 
+    /**
+     * Clears the task input fields and resets the UI.
+     */
     private void clearAndResetUI() {
         taskField.clear();
         timeFrameComboBox.setValue(null);
         urgencyComboBox.setValue(null);
     }
 
+    /**
+     * Handles the event when the remove task button is clicked. Removes the selected task from the task list.
+     */
     @FXML
     protected void handleRemoveTask() {
         Task selectedTask = taskTable.getSelectionModel().getSelectedItem();
@@ -233,6 +224,11 @@ public class HomeController {
         }
     }
 
+    /**
+     * Removes a task from the task list and updates the UI.
+     * @param task The task to remove.
+     * @return True if the task was successfully removed, otherwise false.
+     */
     private boolean removeTask(Task task) {
         try {
             this.task.removeTask(task, Session.getInstance());
@@ -243,6 +239,13 @@ public class HomeController {
             return false;
         }
     }
+
+    /**
+     * Displays an alert with the given title, message, and alert type.
+     * @param title The title of the alert.
+     * @param message The message to display in the alert.
+     * @param type The type of the alert.
+     */
     private void showAlert(String title, String message, Alert.AlertType type) {
         Alert alert = new Alert(type);
         alert.setTitle(title);
@@ -251,6 +254,12 @@ public class HomeController {
         alert.showAndWait();
     }
 
+    /**
+     * Displays a confirmation dialog with the given title and message.
+     * @param title The title of the confirmation dialog.
+     * @param message The message to display in the confirmation dialog.
+     * @return True if the user confirmed the action, otherwise false.
+     */
     private boolean showConfirmation(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle(title);
@@ -258,9 +267,5 @@ public class HomeController {
         alert.setContentText(message);
         return alert.showAndWait().filter(response -> response == ButtonType.OK).isPresent();
     }
-
-
-
-
 }
 

@@ -64,7 +64,7 @@ public class StopwatchController {
         seconds = seconds % 60;
         stopwatchLabel.setText(String.format("%02d:%02d.%02d", minutes, seconds, milliseconds / 10));
 
-        if (stopwatchLabel.getText().equals("01:00.00")) {
+        if (stopwatchLabel.getText().equals("01:00:00.00")) {
             showHourlyAlert();
         }
     }
@@ -74,6 +74,7 @@ public class StopwatchController {
     private void onResetClick() {
         resetTimer();
         pauseTimer();
+        flagList.getItems().clear();
     }
 
     private void resetTimer() {
