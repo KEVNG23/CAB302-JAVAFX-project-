@@ -231,8 +231,8 @@ public class CalendarController implements Initializable {
                         LocalDate currentDateObj = LocalDate.of(dateFocus.getYear(), dateFocus.getMonthValue(), currentDate);
                         List<CalendarActivity> activitiesOnDate = getActivitiesOnDate(currentDateObj);
 
-                        // Create a VBox to hold activity information
-                        VBox activityInfoBox = new VBox();
+                        // Create a VBox to hold activity information with small spacing
+                        VBox activityInfoBox = new VBox(2); // Set spacing between elements to 2 pixels
                         activityInfoBox.setMaxWidth(rectangleWidth);
                         activityInfoBox.setMaxHeight(rectangleHeight);
 
@@ -245,7 +245,7 @@ public class CalendarController implements Initializable {
 
                         // Set the position of the VBox
                         activityInfoBox.setTranslateX(5); // Adjust as needed
-                        activityInfoBox.setTranslateY(5); // Adjust as needed
+                        activityInfoBox.setTranslateY(15); // Adjust as needed to avoid overlapping with the date
 
                         // Add the VBox to the stackPane
                         stackPane.getChildren().add(activityInfoBox);
@@ -263,6 +263,8 @@ public class CalendarController implements Initializable {
             }
         }
     }
+
+
 
     private Stage stage;
     private Scene scene;
